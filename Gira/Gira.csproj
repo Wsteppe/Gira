@@ -170,6 +170,13 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Data\Entities\BaseEntity.cs" />
+    <Compile Include="Data\Entities\Issue.cs" />
+    <Compile Include="Data\GiraContext.cs" />
+    <Compile Include="Data\GiraUoW.cs" />
+    <Compile Include="Data\IGiraUoW.cs" />
+    <Compile Include="Data\Repositories\Instances\BaseRepository.cs" />
+    <Compile Include="Data\Repositories\Interfaces\IBaseRepository.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
