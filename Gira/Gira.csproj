@@ -200,10 +200,12 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\Instances\UserController.cs" />
+    <Compile Include="Controllers\IssueHistoryController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Data\Entities\BaseEntity.cs" />
     <Compile Include="Data\Entities\Issue.cs" />
+    <Compile Include="Data\Entities\IssueHistory.cs" />
     <Compile Include="Data\Enums\IssueStatusCode.cs" />
     <Compile Include="Data\Enums\IssueTransition.cs" />
     <Compile Include="Data\Enums\PriorityCode.cs" />
@@ -294,6 +296,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Controllers\Interfaces\" />
+    <Folder Include="Views\IssueHistory\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

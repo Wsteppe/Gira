@@ -11,6 +11,7 @@ namespace Gira.Data
         private GiraDbContext _context;
 
         private IBaseRepository<Issue> _issues;
+        private IBaseRepository<IssueHistory> _issueHistory;
 
         public GiraUoW(GiraDbContext context)
         {
@@ -24,6 +25,9 @@ namespace Gira.Data
         }
 
         public IBaseRepository<Issue> Issues => _issues ?? (_issues = new BaseRepository<Issue>(_context));
+
+        public IBaseRepository<IssueHistory> IssueHistory
+            => _issueHistory ?? (_issueHistory = new BaseRepository<IssueHistory>(_context));
 
         #region dispose
         public void Dispose()
