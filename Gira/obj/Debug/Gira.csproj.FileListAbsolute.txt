@@ -135,4 +135,12 @@ C:\Users\Stijn\Documents\Informatica\2016-2017\NET\Gira\bin\Microsoft.Owin.Secur
 C:\Users\Stijn\Documents\Informatica\2016-2017\NET\Gira\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 C:\Users\Stijn\Documents\Informatica\2016-2017\NET\Gira\obj\Debug\Gira.dll
 C:\Users\Stijn\Documents\Informatica\2016-2017\NET\Gira\obj\Debug\Gira.pdb
+C:\Users\Stijn\Documents\Informatica\2016-2017\NET\Gira\obj\Debug\Gira.ResourcesUI.GiraUI.resources
+C:\Users\Stijn\Documents\Informatica\2016-2017\NET\Gira\obj\Debug\Gira.csproj.GenerateResource.Cache
+C:\Users\Stijn\Documents\Informatica\2016-2017\NET\Gira\bin\nl-BE\Gira.resources.dll
+C:\Users\Stijn\Documents\Informatica\2016-2017\NET\Gira\obj\Debug\nl-BE\Gira.resources.dll
+C:\Users\Stijn\Documents\Informatica\2016-2017\NET\Gira\obj\Debug\Gira.ResourcesUI.GiraUI.nl-BE.resources
+C:\Users\Stijn\Documents\Informatica\2016-2017\NET\Gira\bin\en-US\Gira.resources.dll
+C:\Users\Stijn\Documents\Informatica\2016-2017\NET\Gira\obj\Debug\Gira.ResourcesUI.GiraUI.en-US.resources
+C:\Users\Stijn\Documents\Informatica\2016-2017\NET\Gira\obj\Debug\en-US\Gira.resources.dll
 C:\Users\Stijn\Documents\Informatica\2016-2017\NET\Gira\obj\Debug\Gira.csprojResolveAssemblyReference.cache

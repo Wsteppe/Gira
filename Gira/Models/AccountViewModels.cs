@@ -55,7 +55,7 @@ namespace Gira.Models
 
         [Required]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [Display(Name = "PassWord", ResourceType = typeof(ResourcesUI.GiraUI))]
         public string Password { get; set; }
 
         [Display(Name = "Remember me?")]
@@ -72,7 +72,7 @@ namespace Gira.Models
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+  [Display(Name = "PassWord", ResourceType = typeof(ResourcesUI.GiraUI))]
         public string Password { get; set; }
 
         [DataType(DataType.Password)]

@@ -54,3 +54,5 @@ C:\Users\Stijn\Documents\Informatica\2016-2017\NET\Gira.Tests\bin\Debug\Microsof
 C:\Users\Stijn\Documents\Informatica\2016-2017\NET\Gira.Tests\obj\Debug\Gira.Tests.csprojResolveAssemblyReference.cache
 C:\Users\Stijn\Documents\Informatica\2016-2017\NET\Gira.Tests\obj\Debug\Gira.Tests.dll
 C:\Users\Stijn\Documents\Informatica\2016-2017\NET\Gira.Tests\obj\Debug\Gira.Tests.pdb
+C:\Users\Stijn\Documents\Informatica\2016-2017\NET\Gira.Tests\bin\Debug\en-US\Gira.resources.dll
+C:\Users\Stijn\Documents\Informatica\2016-2017\NET\Gira.Tests\bin\Debug\nl-BE\Gira.resources.dll

@@ -1,7 +1,11 @@
-﻿@using Gira.Models
+﻿
+@using System.Globalization
+@using Gira.Models
+@using Gira.ResourcesUI
+@using Gira.Utilities
 @model LoginViewModel
 @{
-    ViewBag.Title = "Log in";
+    ViewBag.Title = @Gira.ResourcesUI.GiraUI.Login;
 }
 
 <h2>@ViewBag.Title.</h2>
@@ -11,18 +15,18 @@
             @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
             {
                 @Html.AntiForgeryToken()
-                <h4>Use a local account to log in.</h4>
+                <h4>@Gira.ResourcesUI.GiraUI.LocalAccount</h4>
                 <hr />
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 <div class="form-group">
-                    @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
+                    @Html.LabelFor(m => m.Email, GiraUI.Email, new { @class = "col-md-2 control-label" })
                     <div class="col-md-10">
                         @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
                         @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
                     </div>
                 </div>
                 <div class="form-group">
-                    @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
+                    @Html.LabelFor(m => m.Password, GiraUI.PassWord, new { @class = "col-md-2 control-label" })
                     <div class="col-md-10">
                         @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
                         @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
@@ -33,6 +37,7 @@
                         <div class="checkbox">
                             @Html.CheckBoxFor(m => m.RememberMe)
                             @Html.LabelFor(m => m.RememberMe)
+
                         </div>
                     </div>
                 </div>
@@ -42,7 +47,43 @@
                     </div>
                 </div>
                 <p>
-                    @Html.ActionLink("Register as a new user", "Register")
+                    @Html.ActionLink("English", "SetLanguage", "Language",
+                                new { language = "en" }, null)
+                    <br />
+                    @Html.ActionLink("Nederlands", "SetLanguage", "Language",
+                                new { language = "nl" }, null)
+
+
+                </p>
+
+                <p>
+                    @Gira.ResourcesUI.GiraUI.PassWord
+                </p>
+
+                <p>
+                    @Html.ActionLink(@Gira.ResourcesUI.GiraUI.Register, "Register")
+                    <br />
+                    <br />
+                    @if (Culture.Contains("en"))
+                    {
+                        <text>English | </text>
+                    }
+                    else
+                    {
+                        @Html.ActionLink("English", "SetLanguage", "Language", new { language = "en" }, null)
+
+
+                    }
+                    @if (Culture.Contains("nl"))
+                    {
+                        <text> | Nederlands</text>
+                    }
+                    else
+                    {
+                        @Html.ActionLink("Nederlands", "SetLanguage", "Language", new { language = "nl" }, null)
+
+                    }
+
                 </p>
                 @* Enable this once you have account confirmation enabled for password reset functionality
                     <p>
