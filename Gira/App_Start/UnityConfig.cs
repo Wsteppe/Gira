@@ -1,6 +1,10 @@
 using System.Data.Entity;
 using System.Web.Mvc;
+using Gira.Controllers;
 using Gira.Data;
+using Gira.Models;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Practices.Unity;
 using Unity.Mvc5;
 
@@ -16,9 +20,18 @@ namespace Gira
             // it is NOT necessary to register your controllers
             
             // e.g. container.RegisterType<ITestService, TestService>();
-            container.RegisterType<DbContext, GiraContext>();
+            container.RegisterType<DbContext, GiraDbContext>();
             container.RegisterType<IGiraUoW, GiraUoW>();
-            
+            container.RegisterType<GiraDbContext>();
+            container.RegisterType<GiraInitializer>();
+
+            //identity
+            container.RegisterType<DbContext, GiraDbContext>(new HierarchicalLifetimeManager());
+            container.RegisterType<UserManager<ApplicationUser>>(new HierarchicalLifetimeManager());
+            container.RegisterType<IUserStore<ApplicationUser>, UserStore<ApplicationUser>>(new HierarchicalLifetimeManager());
+            container.RegisterType<AccountController>(new InjectionConstructor());
+            container.RegisterType<RoleController>();
+
             DependencyResolver.SetResolver(new UnityDependencyResolver(container));
         }
     }

@@ -3,16 +3,17 @@ using System.Threading.Tasks;
 using Gira.Data.Entities;
 using Gira.Data.Repositories.Instances;
 using Gira.Data.Repositories.Interfaces;
+using Gira.Models;
 
 namespace Gira.Data
 {
     public sealed class GiraUoW : IGiraUoW, IDisposable
     {
-        private GiraContext _context;
+        private GiraDbContext _context;
 
         private IBaseRepository<Issue> _issues;
 
-        public GiraUoW(GiraContext context)
+        public GiraUoW(GiraDbContext context)
         {
             if (context == null) throw new ArgumentNullException(nameof(context));
             _context = context;

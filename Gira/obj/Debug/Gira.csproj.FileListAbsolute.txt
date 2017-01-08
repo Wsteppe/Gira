@@ -136,3 +136,15 @@ C:\Users\Stijn\Documents\Informatica\2016-2017\NET\Gira\bin\Microsoft.Owin.Secur
 C:\Users\Stijn\Documents\Informatica\2016-2017\NET\Gira\obj\Debug\Gira.dll
 C:\Users\Stijn\Documents\Informatica\2016-2017\NET\Gira\obj\Debug\Gira.pdb
 C:\Users\Stijn\Documents\Informatica\2016-2017\NET\Gira\obj\Debug\Gira.csprojResolveAssemblyReference.cache
+C:\Users\wsteppe\Documents\KPMG Programming\Gira\Gira\bin\Microsoft.Practices.ServiceLocation.dll
+C:\Users\wsteppe\Documents\KPMG Programming\Gira\Gira\bin\Microsoft.Practices.Unity.Configuration.dll
+C:\Users\wsteppe\Documents\KPMG Programming\Gira\Gira\bin\Microsoft.Practices.Unity.dll
+C:\Users\wsteppe\Documents\KPMG Programming\Gira\Gira\bin\Microsoft.Practices.Unity.RegistrationByConvention.dll
+C:\Users\wsteppe\Documents\KPMG Programming\Gira\Gira\bin\Unity.Mvc5.dll
+C:\Users\wsteppe\Documents\KPMG Programming\Gira\Gira\bin\Microsoft.Practices.ServiceLocation.pdb
+C:\Users\wsteppe\Documents\KPMG Programming\Gira\Gira\bin\Microsoft.Practices.ServiceLocation.xml
+C:\Users\wsteppe\Documents\KPMG Programming\Gira\Gira\bin\Microsoft.Practices.Unity.xml
+C:\Users\wsteppe\Documents\KPMG Programming\Gira\Gira\bin\Microsoft.Practices.Unity.Configuration.xml
+C:\Users\wsteppe\Documents\KPMG Programming\Gira\Gira\bin\Microsoft.Practices.Unity.RegistrationByConvention.xml
+C:\Users\wsteppe\Documents\KPMG Programming\Gira\Gira\obj\Debug\Gira.Migrations.Initial.resources
+C:\Users\wsteppe\Documents\KPMG Programming\Gira\Gira\obj\Debug\Gira.csproj.GenerateResource.Cache

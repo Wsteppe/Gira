@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Gira.Data;
+using Gira.Models;
+using Microsoft.AspNet.Identity;
 
 namespace Gira.Controllers
 {
@@ -15,7 +18,7 @@ namespace Gira.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+            var test = User.IsInRole("ADMINISTRATOR");
 
             return View();
         }
