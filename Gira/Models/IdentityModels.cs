@@ -1,6 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Diagnostics;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Gira.Data.Entities;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 
@@ -12,9 +15,14 @@ namespace Gira.Models
         public string Surname { get; set; }
         public string GivenName { get; set; }
         public string MobilePhone { get; set; }
-        [ForeignKey("ResponsibleUserId")]
-        public ApplicationUser ResponsibleUser { get; set; }
-        public string ResponsibleUserId { get; set; }
+
+        [InverseProperty("Creator")]
+        public ICollection<Issue> IssuesCreated { get; set; }
+        [InverseProperty("ResponsibleUser")]
+        public ICollection<Issue> IssuesResponsible { get; set; }
+
+        [InverseProperty("Manager")]
+        public ICollection<Issue> IssuesManaged { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {

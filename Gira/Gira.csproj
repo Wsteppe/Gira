@@ -192,8 +192,11 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
-    <Compile Include="Business\IIssueMachine.cs" />
-    <Compile Include="Business\IssueMachine.cs" />
+    <Compile Include="Business\BusinessException.cs" />
+    <Compile Include="Business\IMapper.cs" />
+    <Compile Include="Business\IssueStateMachine.cs" />
+    <Compile Include="Business\IStateMachine.cs" />
+    <Compile Include="Business\TransitionService.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\Instances\UserController.cs" />
@@ -204,6 +207,7 @@
     <Compile Include="Data\Enums\IssueStatusCode.cs" />
     <Compile Include="Data\Enums\IssueTransition.cs" />
     <Compile Include="Data\Enums\PriorityCode.cs" />
+    <Compile Include="Data\Enums\SecurityRoles.cs" />
     <Compile Include="Data\GiraDbContext.cs" />
     <Compile Include="Data\GiraInitializer.cs" />
     <Compile Include="Data\GiraUoW.cs" />
@@ -222,6 +226,11 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resources\BusinessErrors.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BusinessErrors.resx</DependentUpon>
+    </Compile>
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -297,6 +306,10 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201701072026410_Initial.resx">
       <DependentUpon>201701072026410_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\BusinessErrors.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>BusinessErrors.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

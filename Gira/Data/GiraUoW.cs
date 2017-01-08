@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 using Gira.Data.Entities;
 using Gira.Data.Repositories.Instances;
 using Gira.Data.Repositories.Interfaces;
-using Gira.Models;
 
 namespace Gira.Data
 {
