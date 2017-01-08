@@ -4,6 +4,6 @@
     {
         T Map(TU originalObject);
 
-        TU Map(T originalObject),
+        TU Map(T originalObject);
     }
 }
