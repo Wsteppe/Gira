@@ -18,6 +18,12 @@ namespace Gira
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
+
+            routes.MapRoute(
+                name: "Transaction",
+                url: "{controller}/{action}/{id}/{transition}",
+                defaults: new { controller = "Issue", action = "Index", id = 0, transition = "" }  // Parameter defaults
+            );
         }
     }
 }

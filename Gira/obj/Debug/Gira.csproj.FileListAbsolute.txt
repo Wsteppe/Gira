@@ -148,3 +148,7 @@ C:\Users\wsteppe\Documents\KPMG Programming\Gira\Gira\bin\Microsoft.Practices.Un
 C:\Users\wsteppe\Documents\KPMG Programming\Gira\Gira\bin\Microsoft.Practices.Unity.RegistrationByConvention.xml
 C:\Users\wsteppe\Documents\KPMG Programming\Gira\Gira\obj\Debug\Gira.Migrations.Initial.resources
 C:\Users\wsteppe\Documents\KPMG Programming\Gira\Gira\obj\Debug\Gira.csproj.GenerateResource.Cache
+C:\Users\wsteppe\Documents\KPMG Programming\Gira\Gira\obj\Debug\Gira.Resources.BusinessErrors.resources
+C:\Users\wsteppe\Documents\KPMG Programming\Gira\Gira\bin\Stateless.dll
+C:\Users\wsteppe\Documents\KPMG Programming\Gira\Gira\bin\Stateless.xml
+C:\Users\wsteppe\Documents\KPMG Programming\Gira\Gira\obj\Debug\Gira.Migrations.UserRequirements.resources

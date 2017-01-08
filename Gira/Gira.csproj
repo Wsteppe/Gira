@@ -193,12 +193,13 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="Business\BusinessException.cs" />
-    <Compile Include="Business\IMapper.cs" />
+    <Compile Include="Business\Interfaces\IStateMachine.cs" />
+    <Compile Include="Business\Interfaces\ITransitionService.cs" />
     <Compile Include="Business\IssueStateMachine.cs" />
-    <Compile Include="Business\IStateMachine.cs" />
     <Compile Include="Business\TransitionService.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\Instances\IssueController.cs" />
     <Compile Include="Controllers\Instances\UserController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
@@ -221,9 +222,15 @@
     <Compile Include="Migrations\201701072026410_Initial.Designer.cs">
       <DependentUpon>201701072026410_Initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201701081846158_UserRequirements.cs" />
+    <Compile Include="Migrations\201701081846158_UserRequirements.Designer.cs">
+      <DependentUpon>201701081846158_UserRequirements.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\Issues\IssueEditViewModel.cs" />
+    <Compile Include="Models\Issues\IssueIndexViewModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\BusinessErrors.Designer.cs">
@@ -265,9 +272,7 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Issue\Index.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Views\Account\ConfirmEmail.cshtml" />
     <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
@@ -289,7 +294,11 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Role\Index.cshtml" />
-    <Content Include="Views\User\Index.cshtml" />
+    <Content Include="Views\Issue\_IssuesListPartial.cshtml" />
+    <Content Include="Views\Issue\Edit.cshtml" />
+    <Content Include="Views\Issue\Create.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Issue\_IssueCreatePartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -306,6 +315,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201701072026410_Initial.resx">
       <DependentUpon>201701072026410_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201701081846158_UserRequirements.resx">
+      <DependentUpon>201701081846158_UserRequirements.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\BusinessErrors.resx">
       <Generator>ResXFileCodeGenerator</Generator>

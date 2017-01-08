@@ -1,0 +1,38 @@
+﻿@using Gira.Models
+@model Gira.Models.Issues.IssueIndexViewModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Overview of Issues</h2>
+
+<div>
+    @if (Model.CreatedIssues != null && Model.CreatedIssues.Any())
+    {
+        <h2>My created Issues</h2>
+        @Html.Partial("_IssuesListPartial", Model.CreatedIssues)
+    }
+</div>
+
+<div>
+    @if (Model.CreatedIssues != null && Model.ResponsibleIssues.Any())
+    {
+        <h2>My current issue list</h2>
+        @Html.Partial("_IssuesListPartial", Model.ResponsibleIssues)
+    }
+</div>
+
+<div>
+    @if (Model.ManagedIssues != null && Model.ManagedIssues.Any())
+    {
+        <h2>My team issues (management only)</h2>
+        @Html.Partial("_IssuesListPartial", Model.ManagedIssues)
+    }
+</div>
+
+<div>
+    @Html.Partial("_IssueCreatePartial")
+</div>
+

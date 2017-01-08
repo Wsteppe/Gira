@@ -1,15 +1,16 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Web;
+using Gira.Business.Interfaces;
 using Gira.Data;
 using Gira.Data.Entities;
 using Gira.Data.Enums;
 using Gira.Resources;
 using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace Gira.Business
 {
-    public class TransitionService
+    public class TransitionService : ITransitionService
     {
         private readonly IStateMachine<IssueStatusCode, IssueTransition> _stateMachine;
         private readonly IGiraUoW _uoW;
@@ -20,7 +21,7 @@ namespace Gira.Business
             _uoW = uoW;
         }
 
-        public Issue Transition(Issue issue, IdentityUser user, IssueTransition transition)
+        public Issue Transition(Issue issue, IssueTransition transition)
         {
             //checks
             if(issue.ResponsibleUserId == null || issue.ManagerId == null || issue.CreatorId == null)
@@ -42,7 +43,7 @@ namespace Gira.Business
                 switch (transition)
                 {
                     case IssueTransition.Assign:
-                        if ((isManager && !managerId.Equals(userId)) || !isManager)
+                        if (!isDispatcher)
                             throw new BusinessException(BusinessErrors.UserNotAuthorized);
                         break;
 
@@ -84,10 +85,17 @@ namespace Gira.Business
             issue.IssueStatusCode = _stateMachine.Transition(issue.IssueStatusCode, transition);
             issue.ResponsibleUserId = userId;
 
+            //todo: add history
+
             _uoW.Issues.Update(issue);
             _uoW.SaveAsync();
 
             return issue;
+        }
+
+        public IEnumerable<IssueTransition> GetTransitions(Issue issue)
+        {
+            return _stateMachine.GetTransitions(issue.IssueStatusCode);
         }
     }
 }

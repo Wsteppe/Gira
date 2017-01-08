@@ -1,0 +1,19 @@
+﻿@using Gira.Data.Enums
+@using Gira.Models
+@model Gira.Models.Issues.IssueEditViewModel
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Edit</h2>
+
+@foreach (var transition in Model.Transitions)
+{
+    <tr>
+        <td>
+            <li>@Html.ActionLink(transition.ToString(), "Transition", "Issue", new { issueId = 2, transition = IssueTransition.Assign}, null)</li>
+        </td>
+    </tr>
+}

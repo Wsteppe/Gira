@@ -119,3 +119,5 @@ C:\Users\wsteppe\Documents\KPMG Programming\Gira\Gira.Tests\bin\Debug\Microsoft.
 C:\Users\wsteppe\Documents\KPMG Programming\Gira\Gira.Tests\obj\Debug\Gira.Tests.csprojResolveAssemblyReference.cache
 C:\Users\wsteppe\Documents\KPMG Programming\Gira\Gira.Tests\obj\Debug\Gira.Tests.dll
 C:\Users\wsteppe\Documents\KPMG Programming\Gira\Gira.Tests\obj\Debug\Gira.Tests.pdb
+C:\Users\wsteppe\Documents\KPMG Programming\Gira\Gira.Tests\bin\Debug\Stateless.dll
+C:\Users\wsteppe\Documents\KPMG Programming\Gira\Gira.Tests\bin\Debug\Stateless.xml

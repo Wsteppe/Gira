@@ -1,6 +1,7 @@
 using System.Data.Entity;
 using System.Web.Mvc;
 using Gira.Business;
+using Gira.Business.Interfaces;
 using Gira.Controllers;
 using Gira.Data;
 using Gira.Data.Enums;
@@ -27,6 +28,7 @@ namespace Gira
             container.RegisterType<GiraDbContext>();
             container.RegisterType<GiraInitializer>();
             container.RegisterType<IStateMachine<IssueStatusCode, IssueTransition>, IssueStateMachine>();
+            container.RegisterType<ITransitionService, TransitionService>();
 
             //identity
             container.RegisterType<DbContext, GiraDbContext>(new HierarchicalLifetimeManager());

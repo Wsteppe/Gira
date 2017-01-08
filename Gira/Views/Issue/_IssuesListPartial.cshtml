@@ -1,0 +1,30 @@
+﻿@model IEnumerable<Gira.Data.Entities.Issue>
+
+<table>
+    <tr>
+        <th>
+            Subject
+        </th>
+        <th>
+            Description
+        </th>
+        <th>
+            
+        </th>
+    </tr>
+
+    @foreach (var issue in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => issue.Subject)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => issue.Description)
+            </td>
+            <td>
+                <li>@Html.ActionLink("Details", "Edit", "Issue", new { id = issue.Id }, null)</li>
+            </td>
+        </tr>
+    }
+</table>

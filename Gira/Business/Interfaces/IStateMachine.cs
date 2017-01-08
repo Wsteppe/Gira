@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Gira.Business
+namespace Gira.Business.Interfaces
 {
     public interface IStateMachine<T, TU>
     {
