@@ -4,7 +4,10 @@ using Gira.Business;
 using Gira.Business.Interfaces;
 using Gira.Controllers;
 using Gira.Data;
+using Gira.Data.Entities;
 using Gira.Data.Enums;
+using Gira.Data.Repositories.Instances;
+using Gira.Data.Repositories.Interfaces;
 using Gira.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
@@ -23,10 +26,13 @@ namespace Gira
             // it is NOT necessary to register your controllers
             
             // e.g. container.RegisterType<ITestService, TestService>();
+            //Repo's
             container.RegisterType<DbContext, GiraDbContext>();
             container.RegisterType<IGiraUoW, GiraUoW>();
             container.RegisterType<GiraDbContext>();
             container.RegisterType<GiraInitializer>();
+
+            //services
             container.RegisterType<IStateMachine<IssueStatusCode, IssueTransition>, IssueStateMachine>();
             container.RegisterType<ITransitionService, TransitionService>();
 

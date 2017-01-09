@@ -1,5 +1,6 @@
 ﻿using System;
 using Gira.Data;
+using Gira.Data.Entities;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;

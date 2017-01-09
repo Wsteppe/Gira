@@ -192,17 +192,16 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
-    <Compile Include="Business\BusinessException.cs" />
     <Compile Include="Business\Interfaces\IStateMachine.cs" />
     <Compile Include="Business\Interfaces\ITransitionService.cs" />
     <Compile Include="Business\IssueStateMachine.cs" />
     <Compile Include="Business\TransitionService.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\Instances\IssueController.cs" />
-    <Compile Include="Controllers\Instances\UserController.cs" />
+    <Compile Include="Controllers\IssueController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
+    <Compile Include="Data\Entities\ApplicationUser.cs" />
     <Compile Include="Data\Entities\BaseEntity.cs" />
     <Compile Include="Data\Entities\Issue.cs" />
     <Compile Include="Data\Enums\IssueStatusCode.cs" />
@@ -213,8 +212,13 @@
     <Compile Include="Data\GiraInitializer.cs" />
     <Compile Include="Data\GiraUoW.cs" />
     <Compile Include="Data\IGiraUoW.cs" />
-    <Compile Include="Data\Repositories\Instances\BaseRepository.cs" />
-    <Compile Include="Data\Repositories\Interfaces\IBaseRepository.cs" />
+    <Compile Include="Data\Repositories\Instances\EntityRepository.cs" />
+    <Compile Include="Data\Repositories\Instances\ApplicationUserRepository.cs" />
+    <Compile Include="Data\Repositories\Instances\Repository.cs" />
+    <Compile Include="Data\Repositories\Instances\RoleRepository.cs" />
+    <Compile Include="Data\Repositories\Interfaces\IEntityRepository.cs" />
+    <Compile Include="Data\Repositories\Interfaces\IIdentityRepository.cs" />
+    <Compile Include="Data\Repositories\Interfaces\IRepository.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -228,7 +232,6 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Issues\IssueEditViewModel.cs" />
     <Compile Include="Models\Issues\IssueIndexViewModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -239,6 +242,7 @@
       <DependentUpon>BusinessErrors.resx</DependentUpon>
     </Compile>
     <Compile Include="Startup.cs" />
+    <Compile Include="Utilities\BusinessException.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -302,7 +306,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Controllers\Interfaces\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

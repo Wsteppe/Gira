@@ -5,9 +5,8 @@ using System.Threading.Tasks;
 
 namespace Gira.Data.Repositories.Interfaces
 {
-    public interface IBaseRepository<T> where T : class
+    public interface IRepository<T> where T : class
     {
-        Task<T> GetAsync(int id);
         void Add(T entity);
         void Update(T entity);
         void Remove(T entity);

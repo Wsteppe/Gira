@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Gira.Data.Entities;
 using Gira.Data.Repositories.Instances;
 using Gira.Data.Repositories.Interfaces;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace Gira.Data
 {
@@ -10,7 +11,10 @@ namespace Gira.Data
     {
         private GiraDbContext _context;
 
-        private IBaseRepository<Issue> _issues;
+        private IEntityRepository<Issue> _issues;
+        private IIdentityRepository<IdentityRole> _roles;
+        private IIdentityRepository<ApplicationUser> _users;
+
 
         public GiraUoW(GiraDbContext context)
         {
@@ -23,7 +27,9 @@ namespace Gira.Data
             await _context.SaveChangesAsync();
         }
 
-        public IBaseRepository<Issue> Issues => _issues ?? (_issues = new BaseRepository<Issue>(_context));
+        public IEntityRepository<Issue> Issues => _issues ?? (_issues = new EntityRepository<Issue>(_context));
+        public IIdentityRepository<IdentityRole> Roles => _roles ?? (_roles = new RoleRepository(_context));
+        public IIdentityRepository<ApplicationUser> Users => _users ?? (_users = new ApplicationUserRepository(_context));
 
         #region dispose
         public void Dispose()

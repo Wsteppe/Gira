@@ -1,4 +1,5 @@
-﻿using Gira.Models;
+﻿using Gira.Data.Entities;
+using Gira.Models;
 using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace Gira.Data

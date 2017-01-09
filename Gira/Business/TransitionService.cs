@@ -7,6 +7,7 @@ using Gira.Data;
 using Gira.Data.Entities;
 using Gira.Data.Enums;
 using Gira.Resources;
+using Gira.Utilities;
 using Microsoft.AspNet.Identity;
 
 namespace Gira.Business

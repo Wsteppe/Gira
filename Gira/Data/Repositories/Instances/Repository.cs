@@ -4,26 +4,21 @@ using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
-using Gira.Data.Entities;
 using Gira.Data.Repositories.Interfaces;
 
 namespace Gira.Data.Repositories.Instances
 {
-    public class BaseRepository<T> : IBaseRepository<T> where T : BaseEntity
+    public class Repository<T> : IRepository<T> where T : class
     {
         protected readonly DbContext DbContext;
         protected DbSet<T> Entities { get; }
 
-        internal BaseRepository(DbContext context)
+        internal Repository(DbContext context)
         {
             if (context == null) throw new ArgumentNullException(nameof(context));
 
             DbContext = context;
             Entities = context.Set<T>();
-        }
-        public async Task<T> GetAsync(int id)
-        {
-            return await Entities.FirstOrDefaultAsync(e => e.Id == id);
         }
 
         public void Add(T entity)

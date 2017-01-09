@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Gira.Business
+namespace Gira.Utilities
 {
     public class BusinessException : Exception
     {

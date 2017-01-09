@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Threading.Tasks;
 using System.Web.Mvc;
-using Gira.Business;
 using Gira.Business.Interfaces;
 using Gira.Data;
 using Gira.Data.Entities;
 using Gira.Data.Enums;
 using Gira.Models.Issues;
 using Gira.Resources;
+using Gira.Utilities;
 using Microsoft.AspNet.Identity;
 
-namespace Gira.Controllers.Instances
+namespace Gira.Controllers
 {
     public class IssueController : Controller
     {
@@ -52,12 +52,12 @@ namespace Gira.Controllers.Instances
             if(issue == null)
                 throw new BusinessException(BusinessErrors.IssueInvalid);
 
-            var possibleTransactions = _transitionService.GetTransitions(issue);
+            var possibleTransitions = _transitionService.GetTransitions(issue);
 
             var model = new IssueEditViewModel
             {
                 Issue = issue,
-                Transitions = possibleTransactions
+                Transitions = possibleTransitions
             };
 
             return View(model);
@@ -66,7 +66,7 @@ namespace Gira.Controllers.Instances
         public async Task<ActionResult> Transition(int? id, IssueTransition? transition)
         {
            
-            if (transition == null)
+            if (id == null || transition == null)
                 return RedirectToAction("Index", "Issue");
 
             //get issue
@@ -75,15 +75,11 @@ namespace Gira.Controllers.Instances
             if (issue == null)
                 throw new BusinessException(BusinessErrors.IssueInvalid);
 
-            var possibleTransactions = _transitionService.GetTransitions(issue);
+            issue = _transitionService.Transition(issue, transition.Value);
 
-            var model = new IssueEditViewModel
-            {
-                Issue = issue,
-                Transitions = possibleTransactions
-            };
+            //todo provide visual feedback of transition
 
-            return View(model);
+            return RedirectToAction("Index", "Issue");
         }
 
         /// <summary>
