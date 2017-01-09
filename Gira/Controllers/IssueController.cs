@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Data.Entity;
+using System.Net;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using Gira.Business.Interfaces;
@@ -44,13 +46,13 @@ namespace Gira.Controllers
         public async Task<ActionResult> Edit(int? id)
         {
             if(id == null)
-                return RedirectToAction("Index", "Issue");
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
             //get issue
             var issue = await _db.Issues.GetAsync(id.Value);
 
             if(issue == null)
-                throw new BusinessException(BusinessErrors.IssueInvalid);
+                return HttpNotFound();
 
             var possibleTransitions = _transitionService.GetTransitions(issue);
 
@@ -63,17 +65,39 @@ namespace Gira.Controllers
             return View(model);
         }
 
+        // POST: User/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Edit(Issue issue)
+        {
+            if (issue != null && ModelState.IsValid)
+            {
+                _db.Issues.Update(issue);
+                await _db.SaveAsync();
+                return RedirectToAction("Index");
+            }
+            var transitions = _transitionService.GetTransitions(issue);
+            var model = new IssueEditViewModel
+            {
+                Issue = issue,
+                Transitions = transitions
+            };
+            return View(model);
+        }
+
         public async Task<ActionResult> Transition(int? id, IssueTransition? transition)
         {
            
             if (id == null || transition == null)
-                return RedirectToAction("Index", "Issue");
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
             //get issue
             var issue = await _db.Issues.GetAsync(id.Value);
 
             if (issue == null)
-                throw new BusinessException(BusinessErrors.IssueInvalid);
+                return HttpNotFound();
 
             issue = _transitionService.Transition(issue, transition.Value);
 
@@ -100,7 +124,8 @@ namespace Gira.Controllers
         public async Task<ActionResult> Add(Issue issue)
         {
             if(issue.Subject == null)
-                throw new BusinessException(BusinessErrors.IssueInvalid);
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
             issue.CreatorId = User.Identity.GetUserId();
             issue.Registered = DateTime.Now;
             issue.IssueStatusCode = IssueStatusCode.New;

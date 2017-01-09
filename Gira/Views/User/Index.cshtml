@@ -1,0 +1,13 @@
+﻿@model IEnumerable<Gira.Data.Entities.ApplicationUser>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+@Html.Partial("_UserListPartial", Model)

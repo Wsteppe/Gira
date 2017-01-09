@@ -1,3 +1,9 @@
-﻿@{
+﻿@model IEnumerable<Microsoft.AspNet.Identity.EntityFramework.IdentityRole>
+
+@{
     ViewBag.Title = "Manage Roles";
 }
+
+<h2>Manage roles</h2>
+
+@Html.Partial("_RoleListPartial", Model)
