@@ -1,9 +1,13 @@
-﻿@model IEnumerable<Microsoft.AspNet.Identity.EntityFramework.IdentityRole>
+﻿@model Gira.Models.RoleListViewModel
 
 @{
     ViewBag.Title = "Manage Roles";
 }
 
-<h2>Manage roles</h2>
+<h2>Application Roles:</h2>
 
-@Html.Partial("_RoleListPartial", Model)
+@Html.Partial("_RoleListPartial", Model.Roles)
+
+<h2>Assign Roles to users in the User Edit Screen:</h2>
+
+@Html.Partial("_UserListPartial", Model.Users)

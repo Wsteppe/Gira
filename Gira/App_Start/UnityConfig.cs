@@ -1,4 +1,5 @@
 using System.Data.Entity;
+using System.Web;
 using System.Web.Mvc;
 using Gira.Business;
 using Gira.Business.Interfaces;
@@ -11,6 +12,7 @@ using Gira.Data.Repositories.Interfaces;
 using Gira.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.Owin.Security;
 using Microsoft.Practices.Unity;
 using Unity.Mvc5;
 
@@ -42,6 +44,10 @@ namespace Gira
             container.RegisterType<IUserStore<ApplicationUser>, UserStore<ApplicationUser>>(new HierarchicalLifetimeManager());
             container.RegisterType<AccountController>(new InjectionConstructor());
             container.RegisterType<RoleController>();
+
+            container.RegisterType<IAuthenticationManager>(new InjectionFactory(o => HttpContext.Current.GetOwinContext().Authentication
+    )
+);
 
             DependencyResolver.SetResolver(new UnityDependencyResolver(container));
         }

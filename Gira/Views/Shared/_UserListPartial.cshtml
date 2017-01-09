@@ -1,5 +1,6 @@
 ﻿@model IEnumerable<Gira.Data.Entities.ApplicationUser>
 
+<div>
     <table>
         <tr>
             <th>
@@ -32,13 +33,13 @@
                     @Html.DisplayFor(modelItem => user.UserName)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = user.Id }) |
-                    @Html.ActionLink("Details", "Details", new { id = user.Id }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = user.Id })
+                    @Html.ActionLink("Edit", "Edit", "User",null,new {id = user.Id}) |
+                    @Html.ActionLink("Details", "Details","User",null, new {id = user.Id}) |
+                    @Html.ActionLink("Delete", "Delete","User",null, new {id = user.Id})
                 </td>
             </tr>
 
         }
     </table>
-
+</div>
 

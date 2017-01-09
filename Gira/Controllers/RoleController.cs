@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using System.Web.Mvc;
 using Gira.Data;
+using Gira.Models;
 
 namespace Gira.Controllers
 {
@@ -18,7 +19,15 @@ namespace Gira.Controllers
         public async Task<ActionResult> Index()
         {
             var roles = await _db.Roles.GetAllAsync();
-            return View(roles);
-        }        
+            var users = await _db.Users.GetAllAsync();
+
+            var model = new RoleListViewModel
+            {
+                Roles = roles,
+                Users = users
+            };
+
+            return View(model);
+        }          
     }
 }
