@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Web;
 using Gira.Business.Interfaces;
 using Gira.Data;
@@ -23,67 +24,11 @@ namespace Gira.Business
 
         public Issue Transition(Issue issue, IssueTransition transition)
         {
-            //checks
-            if(issue.ResponsibleUserId == null || issue.ManagerId == null || issue.CreatorId == null)
-                  throw new BusinessException(BusinessErrors.IssueInvalid);
-
-            var isManager = HttpContext.Current.User.IsInRole(SecurityRoles.Manager.ToString());
-            var isDispatcher = HttpContext.Current.User.IsInRole(SecurityRoles.Manager.ToString());
-            var isSolver = HttpContext.Current.User.IsInRole(SecurityRoles.Manager.ToString());
-            var isAdmin = HttpContext.Current.User.IsInRole(SecurityRoles.Manager.ToString());
-
-            var userId = HttpContext.Current.User.Identity.GetUserId();
-            var managerId = issue.ManagerId;
-            var responsibleId = issue.ResponsibleUserId;
-            var originalUserId = issue.CreatorId;
-
-            //if admin skip this step
-            if (!isAdmin)
-            {
-                switch (transition)
-                {
-                    case IssueTransition.Assign:
-                        if (!isDispatcher)
-                            throw new BusinessException(BusinessErrors.UserNotAuthorized);
-                        break;
-
-                    case IssueTransition.Treat:
-                        if ((!isDispatcher && !isSolver) || userId != responsibleId)
-                            throw new BusinessException(BusinessErrors.UserNotAuthorized);
-                        break;
-
-                    case IssueTransition.Solve:
-                        if ((!isDispatcher && !isSolver) || userId != responsibleId)
-                            throw new BusinessException(BusinessErrors.UserNotAuthorized);
-                        break;
-
-                    case IssueTransition.Enquire:
-                        if ((!isDispatcher && !isSolver) || userId != responsibleId)
-                            throw new BusinessException(BusinessErrors.UserNotAuthorized);
-                        break;
-
-                    case IssueTransition.Refuse:
-                        if ((!isDispatcher && !isSolver) || userId != responsibleId)
-                            throw new BusinessException(BusinessErrors.UserNotAuthorized);
-                        break;
-
-                    case IssueTransition.Close:
-                        if (userId != originalUserId)
-                            throw new BusinessException(BusinessErrors.UserNotAuthorized);
-                        break;
-
-                    case IssueTransition.Cancel:
-                        if (userId != originalUserId && ((!isDispatcher && !isSolver) || userId != responsibleId))
-                            throw new BusinessException(BusinessErrors.UserNotAuthorized);
-                        break;
-
-                    default:
-                        throw new ArgumentOutOfRangeException(nameof(transition), transition, null);
-                }
-            }
+            //if transition not in possible transitions
+            if(!GetTransitions(issue).Contains(transition))
+                throw new BusinessException(BusinessErrors.TransitionIsImpossible);
 
             issue.IssueStatusCode = _stateMachine.Transition(issue.IssueStatusCode, transition);
-            issue.ResponsibleUserId = userId;
 
             //todo: add history
 
@@ -95,7 +40,57 @@ namespace Gira.Business
 
         public IEnumerable<IssueTransition> GetTransitions(Issue issue)
         {
-            return _stateMachine.GetTransitions(issue.IssueStatusCode);
+            //possible transitions in this state
+            var stateTransitions = _stateMachine.GetTransitions(issue.IssueStatusCode);
+
+            //possible transitions for the current user
+            var userTransitions = GetUserTransitions(issue);
+
+            //insersection of both lists to get possible transitions
+            return stateTransitions.Intersect(userTransitions);
+        }
+
+        // need method gettransitions with params: issue & userRole
+        private static IEnumerable<IssueTransition> GetUserTransitions(Issue issue)
+        {
+            if (HttpContext.Current.User.IsInRole(SecurityRoles.Administrator.ToString()))
+            {
+                //return all transitions
+                return Enum.GetValues(typeof(IssueTransition)).Cast<IssueTransition>();
+            }
+
+            //checks
+            if (issue.ResponsibleUserId == null || issue.CreatorId == null)
+                throw new BusinessException(BusinessErrors.IssueInvalid);
+
+            var isDispatcher = HttpContext.Current.User.IsInRole(SecurityRoles.Manager.ToString());
+            var isSolver = HttpContext.Current.User.IsInRole(SecurityRoles.Manager.ToString());
+
+            var userId = HttpContext.Current.User.Identity.GetUserId();
+            var responsibleId = issue.ResponsibleUserId;
+            var originalUserId = issue.CreatorId;
+
+            //make lost of transitions and return possible transitions
+            var transitions = new List<IssueTransition>();
+
+            if(isDispatcher)
+                transitions.Add(IssueTransition.Assign);
+
+            if ((isDispatcher || isSolver) && userId == responsibleId)
+            {
+                transitions.Add(IssueTransition.Treat);
+                transitions.Add(IssueTransition.Solve);
+                transitions.Add(IssueTransition.Enquire);
+                transitions.Add(IssueTransition.Refuse);
+            }
+
+            if (userId == originalUserId)
+                transitions.Add(IssueTransition.Close);
+
+            if (isDispatcher || (isSolver && userId == responsibleId) || userId == originalUserId)
+                transitions.Add(IssueTransition.Cancel);
+
+            return transitions;
         }
     }
 }
