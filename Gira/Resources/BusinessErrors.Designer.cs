@@ -70,6 +70,15 @@ namespace Gira.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The issue cannot be allocated to the selected user.
+        /// </summary>
+        internal static string TargetUserInvalid {
+            get {
+                return ResourceManager.GetString("TargetUserInvalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The current transition is impossible.
         /// </summary>
         internal static string TransitionIsImpossible {

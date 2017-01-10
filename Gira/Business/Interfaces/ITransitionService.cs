@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Gira.Data.Entities;
 using Gira.Data.Enums;
 
@@ -12,7 +13,7 @@ namespace Gira.Business.Interfaces
         /// <param name="issue"></param>
         /// <param name="transition"></param>
         /// <returns></returns>
-        Issue Transition(Issue issue, IssueTransition transition);
+        Task<Issue> Transition(Issue issue, IssueTransition transition, string userId);
 
         /// <summary>
         /// wrapper method for statemachine

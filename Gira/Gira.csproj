@@ -235,6 +235,7 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Issues\IssueEditViewModel.cs" />
     <Compile Include="Models\Issues\IssueIndexViewModel.cs" />
+    <Compile Include="Models\Issues\IssueTransitionViewModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\RoleListViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -314,7 +315,6 @@
     <Content Include="Views\User\Edit.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
     <Content Include="Views\Shared\_UserListPartial.cshtml" />
-    <Content Include="Views\Issue\Edit2.cshtml" />
     <Content Include="Views\Manage\ManageProfile.cshtml" />
   </ItemGroup>
   <ItemGroup>

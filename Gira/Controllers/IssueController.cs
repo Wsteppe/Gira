@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Data.Entity;
 using System.Net;
 using System.Threading.Tasks;
 using System.Web.Mvc;
@@ -8,8 +7,6 @@ using Gira.Data;
 using Gira.Data.Entities;
 using Gira.Data.Enums;
 using Gira.Models.Issues;
-using Gira.Resources;
-using Gira.Utilities;
 using Microsoft.AspNet.Identity;
 
 namespace Gira.Controllers
@@ -87,9 +84,8 @@ namespace Gira.Controllers
             return View(model);
         }
 
-        public async Task<ActionResult> Transition(int? id, IssueTransition? transition)
+        public async Task<ActionResult> Transition(int? id, IssueTransition? transition, string userId)
         {
-           
             if (id == null || transition == null)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
@@ -99,7 +95,7 @@ namespace Gira.Controllers
             if (issue == null)
                 return HttpNotFound();
 
-            issue = _transitionService.Transition(issue, transition.Value);
+            await _transitionService.Transition(issue, transition.Value, userId);
 
             //todo provide visual feedback of transition
 

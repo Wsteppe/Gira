@@ -120,6 +120,9 @@
   <data name="IssueInvalid" xml:space="preserve">
     <value>The current issue is in an invalid state, contact your programmer :)</value>
   </data>
+  <data name="TargetUserInvalid" xml:space="preserve">
+    <value>The issue cannot be allocated to the selected user</value>
+  </data>
   <data name="TransitionIsImpossible" xml:space="preserve">
     <value>The current transition is impossible</value>
   </data>

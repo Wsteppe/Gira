@@ -341,14 +341,20 @@ namespace Gira.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> ManageProfile([Bind(Include = "Id,Surname,GivenName,MobilePhone,Email,EmailConfirmed,PasswordHash,SecurityStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEndDateUtc,LockoutEnabled,AccessFailedCount,UserName")] ApplicationUser applicationUser)
+        public async Task<ActionResult> ManageProfile(ApplicationUser applicationUser)
         {
             if (applicationUser == null || !ModelState.IsValid) return View(applicationUser);
 
-            //override user id so that user can only adjust his own profile.
-            applicationUser.Id = User.Identity.GetUserId();
+            var dbUser = await _db.Users.GetAsync(User.Identity.GetUserId());
 
-            _db.Users.Update(applicationUser);
+            dbUser.Surname = applicationUser.Surname;
+            dbUser.GivenName = applicationUser.GivenName;
+            dbUser.MobilePhone = applicationUser.MobilePhone;
+            dbUser.Email = applicationUser.Email;
+            dbUser.PhoneNumber = applicationUser.PhoneNumber;
+            dbUser.UserName = applicationUser.UserName;
+
+            _db.Users.Update(dbUser);
             await _db.SaveAsync();
             return RedirectToAction("Index");
         }

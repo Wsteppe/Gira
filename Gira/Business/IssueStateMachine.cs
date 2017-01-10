@@ -32,16 +32,9 @@ namespace Gira.Business
         {
             _stateMachine = new StateMachine<IssueStatusCode,IssueTransition>(code);
 
-            //manager
-            _stateMachine.Configure(IssueStatusCode.New)
-                .Permit(IssueTransition.Assign, IssueStatusCode.Assigned)
-                .Permit(IssueTransition.Cancel, IssueStatusCode.Canceled);
-
             //dispatcher
-            _stateMachine.Configure(IssueStatusCode.Assigned)
-                .Permit(IssueTransition.Enquire, IssueStatusCode.Enquiring)
-                .Permit(IssueTransition.Refuse, IssueStatusCode.Refused)
-                .Permit(IssueTransition.Treat, IssueStatusCode.Processing)
+            _stateMachine.Configure(IssueStatusCode.New)
+                .Permit(IssueTransition.Assign, IssueStatusCode.Processing)
                 .Permit(IssueTransition.Cancel, IssueStatusCode.Canceled);
 
             //solver or dispatcher
@@ -58,7 +51,7 @@ namespace Gira.Business
 
             //solver
             _stateMachine.Configure(IssueStatusCode.Refused)
-                .Permit(IssueTransition.Assign, IssueStatusCode.Assigned)
+                .Permit(IssueTransition.Assign, IssueStatusCode.Processing)
                 .Permit(IssueTransition.Cancel, IssueStatusCode.Canceled);
         }
     }

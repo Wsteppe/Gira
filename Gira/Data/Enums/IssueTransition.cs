@@ -2,8 +2,7 @@
 {
     public enum IssueTransition
     {
-        Assign = 1, // to dispatcher
-        Treat, // to solver
+        Assign = 1, // to solver
         Solve,
         Close,
         Cancel,

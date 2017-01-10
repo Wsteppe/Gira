@@ -44,8 +44,9 @@ namespace Gira
             container.RegisterType<IUserStore<ApplicationUser>, UserStore<ApplicationUser>>(new HierarchicalLifetimeManager());
             container.RegisterType<AccountController>(new InjectionConstructor());
             container.RegisterType<RoleController>();
+            container.RegisterType<UserManager<ApplicationUser>>();
 
-            container.RegisterType<IAuthenticationManager>(new InjectionFactory(o => HttpContext.Current.GetOwinContext().Authentication
+        container.RegisterType<IAuthenticationManager>(new InjectionFactory(o => HttpContext.Current.GetOwinContext().Authentication
     )
 );
 

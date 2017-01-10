@@ -13,82 +13,60 @@
     <dt>
         Creator
     </dt>
-
     <dd>
         @Html.DisplayFor(model => model.Issue.Creator.UserName)
     </dd>
-
     <dt>
         Manager
     </dt>
-
     <dd>
         @Html.DisplayFor(model => model.Issue.Manager.UserName)
     </dd>
-
     <dt>
         Responsible user
     </dt>
-
     <dd>
         @Html.DisplayFor(model => model.Issue.ResponsibleUser.UserName)
     </dd>
-
     <dt>
         @Html.DisplayNameFor(model => model.Issue.Subject)
     </dt>
-
     <dd>
         @Html.DisplayFor(model => model.Issue.Subject)
     </dd>
-
     <dt>
         @Html.DisplayNameFor(model => model.Issue.Description)
     </dt>
-
     <dd>
         @Html.DisplayFor(model => model.Issue.Description)
     </dd>
-
     <dt>
         @Html.DisplayNameFor(model => model.Issue.PriorityCode)
     </dt>
-
     <dd>
         @Html.DisplayFor(model => model.Issue.PriorityCode)
     </dd>
-
     <dt>
         @Html.DisplayNameFor(model => model.Issue.IssueStatusCode)
     </dt>
-
     <dd>
         @Html.DisplayFor(model => model.Issue.IssueStatusCode)
     </dd>
-
     <dt>
         @Html.DisplayNameFor(model => model.Issue.Occurrence)
     </dt>
-
     <dd>
         @Html.DisplayFor(model => model.Issue.Occurrence)
     </dd>
-
     <dt>
         @Html.DisplayNameFor(model => model.Issue.Registered)
     </dt>
-
     <dd>
         @Html.DisplayFor(model => model.Issue.Registered)
     </dd>
-
 </dl>
 
 @foreach (var transition in Model.Transitions)
 {
-    <tr>
-        <td>
-            <li>@Html.ActionLink(transition.ToString(), "Transition", "Issue", new { issueId = 2, transition = IssueTransition.Assign}, null)</li>
-        </td>
-    </tr>
+    @Html.ActionLink(transition.ToString(), "Transition", "Issue", new { id = Model.Issue.Id, transition }, null)
 }
