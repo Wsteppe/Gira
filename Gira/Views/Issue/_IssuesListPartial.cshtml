@@ -6,11 +6,20 @@
             Subject
         </th>
         <th>
-            Description
+            Issue priority
         </th>
         <th>
-            
+            Creator username
         </th>
+        <th>
+            Issue status
+        </th>
+        <th>
+            Responsible username
+        </th>
+        <td>
+            Issue description
+        </td>
     </tr>
 
     @foreach (var issue in Model)
@@ -20,10 +29,25 @@
                 @Html.DisplayFor(modelItem => issue.Subject)
             </td>
             <td>
+                @if (issue.PriorityCode.HasValue)
+                {
+                    @Html.DisplayFor(modelItem => issue.PriorityCode)
+                }              
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => issue.Creator.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => issue.IssueStatusCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => issue.ResponsibleUser.UserName)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => issue.Description)
             </td>
             <td>
-                <li>@Html.ActionLink("Details", "Edit", "Issue", new { id = issue.Id }, null)</li>
+                @Html.ActionLink("Edit", "Edit", "Issue", new { id = issue.Id }, null)
             </td>
         </tr>
     }

@@ -20,21 +20,21 @@ namespace Gira.Data.Entities
         /// User currently responsible for the issue
         /// </summary>
         [ForeignKey("ResponsibleUserId")]
-        public ApplicationUser ResponsibleUser { get; set; }
+        public virtual ApplicationUser ResponsibleUser { get; set; }
         public string ResponsibleUserId { get; set; }
 
         /// <summary>
         /// Original submitter of the issue
         /// </summary>
         [ForeignKey("CreatorId")]
-        public ApplicationUser Creator { get; set; }
+        public virtual ApplicationUser Creator { get; set; }
         public string CreatorId { get; set; }
 
         /// <summary>
         /// Original submitter of the issue
         /// </summary>
         [ForeignKey("ManagerId")]
-        public ApplicationUser Manager { get; set; }
+        public virtual ApplicationUser Manager { get; set; }
         public string ManagerId { get; set; }
 
         public DateTime? Registered { get; set; }

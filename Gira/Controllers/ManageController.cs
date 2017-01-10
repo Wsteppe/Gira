@@ -3,6 +3,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using Gira.Data;
+using Gira.Data.Entities;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
@@ -15,15 +17,13 @@ namespace Gira.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private readonly IGiraUoW _db;
 
-        public ManageController()
-        {
-        }
-
-        public ManageController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
+        public ManageController(ApplicationUserManager userManager, ApplicationSignInManager signInManager, IGiraUoW db)
         {
             UserManager = userManager;
             SignInManager = signInManager;
+            _db = db;
         }
 
         public ApplicationSignInManager SignInManager
@@ -333,7 +333,28 @@ namespace Gira.Controllers
             base.Dispose(disposing);
         }
 
-#region Helpers
+        public async Task<ActionResult> ManageProfile()
+        {
+            var user = await _db.Users.GetAsync(User.Identity.GetUserId());
+            return View(user);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> ManageProfile([Bind(Include = "Id,Surname,GivenName,MobilePhone,Email,EmailConfirmed,PasswordHash,SecurityStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEndDateUtc,LockoutEnabled,AccessFailedCount,UserName")] ApplicationUser applicationUser)
+        {
+            if (applicationUser == null || !ModelState.IsValid) return View(applicationUser);
+
+            //override user id so that user can only adjust his own profile.
+            applicationUser.Id = User.Identity.GetUserId();
+
+            _db.Users.Update(applicationUser);
+            await _db.SaveAsync();
+            return RedirectToAction("Index");
+        }
+
+
+        #region Helpers
         // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";
 
