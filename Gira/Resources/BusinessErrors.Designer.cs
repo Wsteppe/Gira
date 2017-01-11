@@ -70,6 +70,15 @@ namespace Gira.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to There are currently no users with the &quot;Solver&quot; role in the application.
+        /// </summary>
+        internal static string NoSolvers {
+            get {
+                return ResourceManager.GetString("NoSolvers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The issue cannot be allocated to the selected user.
         /// </summary>
         internal static string TargetUserInvalid {

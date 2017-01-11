@@ -11,6 +11,6 @@ namespace Gira.Models.Issues
         public IssueTransition Transition { get; set; }
 
         //load only users who are by their role acceptable
-        public IEnumerable<ApplicationUser> Users { get; set; }
+        public IEnumerable<ApplicationUser> Solvers { get; set; }
     }
 }

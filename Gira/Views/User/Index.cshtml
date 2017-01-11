@@ -10,4 +10,48 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-@Html.Partial("_UserListPartial", Model)
+<div>
+    <table>
+        <tr>
+            <th>
+                Surname
+            </th>
+            <th>
+                Given Name
+            </th>
+            <th>
+                Email
+            </th>
+            <th>
+                User Name
+            </th>
+        </tr>
+
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => user.Surname)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => user.GivenName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => user.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => user.UserName)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", "User", null, new {id = user.Id}) |
+                    @Html.ActionLink("Details", "Details", "User", null, new {id = user.Id}) |
+                    @Html.ActionLink("Delete", "Delete", "User", null, new {id = user.Id})
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+
+<div>
+    @Html.ActionLink("Create new user", "Create", "User")
+</div>

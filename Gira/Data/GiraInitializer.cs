@@ -1,6 +1,4 @@
 ﻿using System.Data.Entity;
-using System.Threading.Tasks;
-using Gira.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 

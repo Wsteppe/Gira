@@ -22,7 +22,7 @@ namespace Gira.Controllers
             return View(await _db.Users.GetAllAsync());
         }
 
-        // GET: User/Details/5
+        [Authorize(Roles = "Administrator,Solver,Dispatcher,Manager")]
         public async Task<ActionResult> Details(string id)
         {
             if (id == null)

@@ -11,7 +11,7 @@
 <div>
     @if (Model.CreatedIssues != null && Model.CreatedIssues.Any())
     {
-        <h2>My created Issues</h2>
+        <h4>My created Issues</h4>
         @Html.Partial("_IssuesListPartial", Model.CreatedIssues)
     }
 </div>
@@ -19,7 +19,7 @@
 <div>
     @if (Model.CreatedIssues != null && Model.ResponsibleIssues.Any())
     {
-        <h2>My current issue list</h2>
+        <h4>My current issue list</h4>
         @Html.Partial("_IssuesListPartial", Model.ResponsibleIssues)
     }
 </div>
@@ -27,7 +27,7 @@
 <div>
     @if (Model.ManagedIssues != null && Model.ManagedIssues.Any())
     {
-        <h2>My team issues (management only)</h2>
+        <h4>My team issues (management only)</h4>
         @Html.Partial("_IssuesListPartial", Model.ManagedIssues)
     }
 </div>

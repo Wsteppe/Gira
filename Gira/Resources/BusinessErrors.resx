@@ -120,6 +120,9 @@
   <data name="IssueInvalid" xml:space="preserve">
     <value>The current issue is in an invalid state, contact your programmer :)</value>
   </data>
+  <data name="NoSolvers" xml:space="preserve">
+    <value>There are currently no users with the "Solver" role in the application</value>
+  </data>
   <data name="TargetUserInvalid" xml:space="preserve">
     <value>The issue cannot be allocated to the selected user</value>
   </data>

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using System.Web.Mvc;
@@ -7,6 +9,8 @@ using Gira.Data;
 using Gira.Data.Entities;
 using Gira.Data.Enums;
 using Gira.Models.Issues;
+using Gira.Resources;
+using Gira.Utilities;
 using Microsoft.AspNet.Identity;
 
 namespace Gira.Controllers
@@ -84,20 +88,57 @@ namespace Gira.Controllers
             return View(model);
         }
 
-        public async Task<ActionResult> Transition(int? id, IssueTransition? transition, string userId)
+        public async Task<ActionResult> Transition(int? id, IssueTransition? transition)
         {
             if (id == null || transition == null)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
-            //get issue
             var issue = await _db.Issues.GetAsync(id.Value);
 
             if (issue == null)
                 return HttpNotFound();
 
-            await _transitionService.Transition(issue, transition.Value, userId);
+            var model = new IssueTransitionViewModel
+            {
+                Issue = issue,
+                Transition = transition.Value
+            };
 
-            //todo provide visual feedback of transition
+            if (transition != IssueTransition.Assign) return View(model);
+
+            //if transition is assign we need solvers
+            var solverRole = await _db.Roles.SingleOrDefaultAsync(r => r.Name.ToLower().Equals("solver"));
+
+            var solvers = await _db.Users.FindAsync(u => u.Roles.Any(r => r.RoleId == solverRole.Id));
+
+            if (solvers == null || !solvers.Any())
+                return new HttpStatusCodeResult(HttpStatusCode.NotFound, BusinessErrors.NoSolvers);
+
+            model.Solvers = solvers;
+
+            return View(model);
+        }
+
+        //public async Task<ActionResult> PerformTransition(int? id, IssueTransition? transition, string userId)
+        public async Task<ActionResult> PerformTransition(int? id, IssueTransition? transition, string userId)
+        {
+            if (id == null || transition ==  null)
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            
+            //get issue
+            var issue = await _db.Issues.GetAsync(id.Value);
+
+            if (issue == null)
+                return HttpNotFound(BusinessErrors.IssueInvalid);
+
+            try
+            {
+                await _transitionService.Transition(issue, transition.Value, userId);
+            }
+            catch(Exception ex)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest, ex.Message);
+            }
 
             return RedirectToAction("Index", "Issue");
         }

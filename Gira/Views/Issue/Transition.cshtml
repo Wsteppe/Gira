@@ -1,0 +1,116 @@
+﻿@model Gira.Models.Issues.IssueTransitionViewModel
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Transition</h2>
+
+<dl class="dl-horizontal">
+    <dt>
+        Creator
+    </dt>
+    <dd>
+        @Html.DisplayFor(model => model.Issue.Creator.UserName)
+    </dd>
+    <dt>
+        Manager
+    </dt>
+    <dd>
+        @Html.DisplayFor(model => model.Issue.Manager.UserName)
+    </dd>
+    <dt>
+        Responsible user
+    </dt>
+    <dd>
+        @Html.DisplayFor(model => model.Issue.ResponsibleUser.UserName)
+    </dd>
+    <dt>
+        @Html.DisplayNameFor(model => model.Issue.Subject)
+    </dt>
+    <dd>
+        @Html.DisplayFor(model => model.Issue.Subject)
+    </dd>
+    <dt>
+        @Html.DisplayNameFor(model => model.Issue.Description)
+    </dt>
+    <dd>
+        @Html.DisplayFor(model => model.Issue.Description)
+    </dd>
+    <dt>
+        @Html.DisplayNameFor(model => model.Issue.PriorityCode)
+    </dt>
+    <dd>
+        @Html.DisplayFor(model => model.Issue.PriorityCode)
+    </dd>
+    <dt>
+        @Html.DisplayNameFor(model => model.Issue.IssueStatusCode)
+    </dt>
+    <dd>
+        @Html.DisplayFor(model => model.Issue.IssueStatusCode)
+    </dd>
+    <dt>
+        @Html.DisplayNameFor(model => model.Issue.Occurrence)
+    </dt>
+    <dd>
+        @Html.DisplayFor(model => model.Issue.Occurrence)
+    </dd>
+    <dt>
+        @Html.DisplayNameFor(model => model.Issue.Registered)
+    </dt>
+    <dd>
+        @Html.DisplayFor(model => model.Issue.Registered)
+    </dd>
+</dl>
+
+@if (Model.Solvers != null && Model.Solvers.Any())
+{
+    <h2>Assign solver</h2>
+    <div>
+        <table>
+            <tr>
+                <th>
+                    Surname
+                </th>
+                <th>
+                    Given Name
+                </th>
+                <th>
+                    Email
+                </th>
+                <th>
+                    User Name
+                </th>
+                <th>
+                    Action
+                </th>
+            </tr>
+
+            @foreach (var user in Model.Solvers)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => user.Surname)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => user.GivenName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => user.Email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => user.UserName)
+                    </td>
+                    <td>
+                        @Html.ActionLink(Model.Transition.ToString(), "PerformTransition", "Issue", new {id = Model.Issue.Id, Model.Transition, user.Id}, null)
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+}
+else
+{
+    @Html.ActionLink(Model.Transition.ToString(), "PerformTransition", "Issue", new { id = Model.Issue.Id, Model.Transition }, null)
+}

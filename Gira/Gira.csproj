@@ -316,6 +316,8 @@
     <Content Include="Views\User\Index.cshtml" />
     <Content Include="Views\Shared\_UserListPartial.cshtml" />
     <Content Include="Views\Manage\ManageProfile.cshtml" />
+    <Content Include="Views\Issue\Transition.cshtml" />
+    <Content Include="Views\View.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
