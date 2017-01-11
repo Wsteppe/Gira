@@ -8,19 +8,23 @@
 }
 
 <h2>Edit</h2>
+<h4>Issue</h4>
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>Issue</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.Issue.Id)
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Issue.Subject, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Issue.Subject, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Issue.Subject, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Issue.Subject, "", new { @class = "text-danger" })
@@ -28,7 +32,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Issue.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Issue.Description, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Issue.Description, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Issue.Description, "", new { @class = "text-danger" })
@@ -36,7 +40,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Issue.PriorityCode, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Issue.PriorityCode, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EnumDropDownListFor(model => model.Issue.PriorityCode, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.Issue.PriorityCode, "", new { @class = "text-danger" })
@@ -44,7 +48,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Issue.Occurrence, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Issue.Occurrence, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Issue.Occurrence, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Issue.Occurrence, "", new { @class = "text-danger" })
@@ -60,6 +64,14 @@
         </div>
 
         <div class="form-group">
+            @Html.LabelFor(model => model.Issue.IssueStatusCode, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DisplayFor(model => model.Issue.IssueStatusCode, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+
+
+        <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Save" class="btn btn-default" />
             </div>
@@ -67,11 +79,13 @@
     </div>
 }
 
-@foreach (var transition in Model.Transitions)
+@if (Model.Transitions != null && Model.Transitions.Any())
 {
-    <h4>@Html.ActionLink(transition.ToString(), "Transition", "Issue", new { id = Model.Issue.Id, transition }, null)</h4>
+    <h4>Adjust issue status:</h4>
+    <p>(Note that you will only see the transitions you are able to do in your current role/function.)</p>
+    foreach (var transition in Model.Transitions)
+    {
+        <h4>@Html.ActionLink(transition.ToString(), "Transition", "Issue", new { id = Model.Issue.Id, transition }, null)</h4>
+    }
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>

@@ -36,7 +36,10 @@ namespace Gira.Controllers
                 CreatedIssues = await _db.Issues.FindAsync(i => i.CreatorId == userId),
                 ResponsibleIssues = await _db.Issues.FindAsync(i => i.ResponsibleUserId == userId),
                 ManagedIssues = await _db.Issues.FindAsync(i => i.ManagerId == userId),
+                AllIssues = User.IsInRole("Administrator") ? await _db.Issues.GetAllAsync() : null
             };
+
+            var test = User.IsInRole("Administrator");
 
             if (User.IsInRole(SecurityRoles.Dispatcher.ToString()))
                 model.IssuesToDispatch = await _db.Issues.FindAsync(i => i.IssueStatusCode == IssueStatusCode.New); 

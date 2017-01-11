@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -11,7 +12,9 @@ namespace Gira.Data.Entities
     public class ApplicationUser : IdentityUser
     {
         public string Surname { get; set; }
+        [DisplayName(@"Given Name")]
         public string GivenName { get; set; }
+        [DisplayName(@"Mobile")]
         public string MobilePhone { get; set; }
 
         [InverseProperty("Creator")]

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Gira.Data.Enums;
@@ -11,8 +12,10 @@ namespace Gira.Data.Entities
         [Required]
         public string Subject { get; set; }
         public string Description { get; set; }
+        [DisplayName(@"Issue Priority")]
         public PriorityCode? PriorityCode { get; set; }
         [Required]
+        [DisplayName(@"Current Status")]
         public IssueStatusCode IssueStatusCode { get; set; }
         public DateTime? Occurrence { get; set; }
 
@@ -20,6 +23,7 @@ namespace Gira.Data.Entities
         /// User currently responsible for the issue
         /// </summary>
         [ForeignKey("ResponsibleUserId")]
+        [DisplayName(@"Responsible User")]
         public virtual ApplicationUser ResponsibleUser { get; set; }
         public string ResponsibleUserId { get; set; }
 

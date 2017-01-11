@@ -5,6 +5,7 @@ using Gira.Models;
 
 namespace Gira.Controllers
 {
+    [Authorize(Roles = "Administrator")]
     public class RoleController : Controller
     {
         private readonly IGiraUoW _db;

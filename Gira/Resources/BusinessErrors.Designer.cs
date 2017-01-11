@@ -97,6 +97,15 @@ namespace Gira.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to User details are invalid.
+        /// </summary>
+        internal static string UserInvalid {
+            get {
+                return ResourceManager.GetString("UserInvalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The current user is not authorised for this transaction.
         /// </summary>
         internal static string UserNotAuthorized {

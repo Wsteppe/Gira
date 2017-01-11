@@ -9,6 +9,14 @@
 <h2>Overview of Issues</h2>
 
 <div>
+    @if (Model.AllIssues != null && Model.AllIssues.Any())
+    {
+        <h4>Admin: all issues</h4>
+        @Html.Partial("_IssuesListPartial", Model.AllIssues)
+    }
+</div>
+
+<div>
     @if (Model.CreatedIssues != null && Model.CreatedIssues.Any())
     {
         <h4>My created Issues</h4>
@@ -31,7 +39,7 @@
         @Html.Partial("_IssuesListPartial", Model.ManagedIssues)
     }
 </div>
-
+<br/>
 <div>
     @Html.Partial("_IssueCreatePartial")
 </div>

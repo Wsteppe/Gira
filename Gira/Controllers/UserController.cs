@@ -3,6 +3,7 @@ using System.Net;
 using System.Web.Mvc;
 using Gira.Data;
 using Gira.Data.Entities;
+using Gira.Resources;
 
 namespace Gira.Controllers
 {
@@ -19,7 +20,8 @@ namespace Gira.Controllers
         // GET: User
         public async Task<ActionResult> Index()
         {
-            return View(await _db.Users.GetAllAsync());
+            var model = await _db.Users.GetAllAsync();
+            return View(model);
         }
 
         [Authorize(Roles = "Administrator,Solver,Dispatcher,Manager")]
@@ -27,7 +29,7 @@ namespace Gira.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest, BusinessErrors.UserInvalid);
             }
             var applicationUser = await _db.Users.GetAsync(id);
             if (applicationUser == null)

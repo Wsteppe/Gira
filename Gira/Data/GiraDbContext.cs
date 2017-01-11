@@ -1,4 +1,6 @@
-﻿using Gira.Data.Entities;
+﻿using System.Data.Entity;
+using Gira.Data.Entities;
+using Gira.Migrations;
 using Gira.Models;
 using Microsoft.AspNet.Identity.EntityFramework;
 
@@ -15,5 +17,7 @@ namespace Gira.Data
         {
             return new GiraDbContext();
         }
+
+        public DbSet<Issue> Issues { get; set; }
     }
 }
