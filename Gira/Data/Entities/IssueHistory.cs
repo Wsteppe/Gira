@@ -11,17 +11,23 @@ namespace Gira.Data.Entities
     {
         private Enum IssueStatusCode;
         private DateTime StatusUpDate;
-        private BaseEntity IssueId;
-        private SecurityRoles Role;
+        private BaseEntity IssueId
+        {
+            get { return this.IssueId;    }
+            set { this.IssueId = IssueId; }
+        }
+    
+private SecurityRoles Role;
 
 
-        public IssueHistory(Enum issueStatusCode, DateTime statusUpDate, int issueId, SecurityRoles role)
+        public IssueHistory(Enum issueStatusCode, DateTime statusUpDate, BaseEntity issueId, SecurityRoles role)
         {
             this.IssueStatusCode = issueStatusCode;
             this.StatusUpDate = statusUpDate;
-            this.IssueId = BaseEntity(issueId);
+            this.IssueId = issueId;
             this.Role = role;
         }
+     
 
     }
 
