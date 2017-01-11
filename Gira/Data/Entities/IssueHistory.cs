@@ -7,22 +7,22 @@ using Microsoft.Ajax.Utilities;
 
 namespace Gira.Data.Entities
 {
-    public class IssueHistory : Issue
+    public class IssueHistory : BaseEntity
     {
-        private IssueStatusCode Status;
+        private Enum IssueStatusCode;
         private DateTime StatusUpDate;
-        protected List<Issue> History = new List<Issue>();
+        private BaseEntity IssueId;
+        private SecurityRoles Role;
 
-        public IssueHistory(IssueStatusCode status, DateTime statusUpdate)
+
+        public IssueHistory(Enum issueStatusCode, DateTime statusUpDate, int issueId, SecurityRoles role)
         {
-           History.Add(new IssueHistory(status, statusUpdate) {Status = status, StatusUpDate = statusUpdate});
-
+            this.IssueStatusCode = issueStatusCode;
+            this.StatusUpDate = statusUpDate;
+            this.IssueId = BaseEntity(issueId);
+            this.Role = role;
         }
 
-        public List<Issue> GetIssueHistoy()
-        {
-            return History;
-        }
     }
 
 

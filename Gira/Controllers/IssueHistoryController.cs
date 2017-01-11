@@ -13,7 +13,7 @@ namespace Gira.Controllers
     {
         private readonly TransitionService _transitionService;
         private readonly GiraDbContext _context;
-
+        protected List<Issue> History = new List<Issue>();
 
         public IssueHistoryController(TransitionService transitionService, GiraDbContext context)
         {
