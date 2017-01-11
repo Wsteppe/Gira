@@ -7,6 +7,7 @@ using Gira.Data;
 using Gira.Data.Entities;
 using Gira.Models.User;
 using Gira.Resources;
+using Microsoft.AspNet.Identity;
 
 namespace Gira.Controllers
 {
@@ -38,16 +39,17 @@ namespace Gira.Controllers
             if (user == null)
                 return HttpNotFound();
 
-            //add user issues to detail view
-            if (User.IsInRole("Administrator") || User.IsInRole("Manager"))
-            {
-                //var issues = _db.Issues.FindAsync(i => i.)
-            }
-
             var model = new UserDetailViewModel
             {
                 User = user
             };
+
+            if (!User.IsInRole("Administrator") && !User.IsInRole("Manager")) return View(model);
+
+            //add issues to detail view if user is manager
+            var userId = User.Identity.GetUserId();
+            model.Issues = await
+                _db.Issues.FindAsync(i => i.ResponsibleUser.ManagerId == userId || i.Creator.ManagerId == userId);
 
             return View(model);
         }
