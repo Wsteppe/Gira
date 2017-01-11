@@ -8,7 +8,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace Gira.Data.Entities
 {
-    // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit http://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
+    //lazy loading ftw
     public class ApplicationUser : IdentityUser
     {
         public string Surname { get; set; }
@@ -18,12 +18,12 @@ namespace Gira.Data.Entities
         public string MobilePhone { get; set; }
 
         [InverseProperty("Creator")]
-        public ICollection<Issue> IssuesCreated { get; set; }
+        public virtual ICollection<Issue> IssuesCreated { get; set; }
         [InverseProperty("ResponsibleUser")]
-        public ICollection<Issue> IssuesResponsible { get; set; }
+        public virtual ICollection<Issue> IssuesResponsible { get; set; }
 
-        [InverseProperty("Manager")]
-        public ICollection<Issue> IssuesManaged { get; set; }
+        public virtual ApplicationUser Manager { get; set; }
+        public string ManagerId { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {

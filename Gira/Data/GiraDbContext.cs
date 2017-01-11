@@ -17,7 +17,5 @@ namespace Gira.Data
         {
             return new GiraDbContext();
         }
-
-        public DbSet<Issue> Issues { get; set; }
     }
 }

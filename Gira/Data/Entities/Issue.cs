@@ -34,13 +34,6 @@ namespace Gira.Data.Entities
         public virtual ApplicationUser Creator { get; set; }
         public string CreatorId { get; set; }
 
-        /// <summary>
-        /// Original submitter of the issue
-        /// </summary>
-        [ForeignKey("ManagerId")]
-        public virtual ApplicationUser Manager { get; set; }
-        public string ManagerId { get; set; }
-
         public DateTime? Registered { get; set; }
     }
 }

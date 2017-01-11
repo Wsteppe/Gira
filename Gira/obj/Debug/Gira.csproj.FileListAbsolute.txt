@@ -152,3 +152,4 @@ C:\Users\wsteppe\Documents\KPMG Programming\Gira\Gira\obj\Debug\Gira.Resources.B
 C:\Users\wsteppe\Documents\KPMG Programming\Gira\Gira\bin\Stateless.dll
 C:\Users\wsteppe\Documents\KPMG Programming\Gira\Gira\bin\Stateless.xml
 C:\Users\wsteppe\Documents\KPMG Programming\Gira\Gira\obj\Debug\Gira.Migrations.UserRequirements.resources
+C:\Users\wsteppe\Documents\KPMG Programming\Gira\Gira\obj\Debug\Gira.Migrations.RevisedManager.resources

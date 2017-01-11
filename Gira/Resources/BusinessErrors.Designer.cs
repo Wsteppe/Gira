@@ -70,6 +70,15 @@ namespace Gira.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to There are currently no users with the &quot;Manager&quot; role in the application.
+        /// </summary>
+        internal static string NoManagers {
+            get {
+                return ResourceManager.GetString("NoManagers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to There are currently no users with the &quot;Solver&quot; role in the application.
         /// </summary>
         internal static string NoSolvers {

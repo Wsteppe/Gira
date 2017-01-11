@@ -1,4 +1,4 @@
-﻿@model Gira.Data.Entities.ApplicationUser
+﻿@model Gira.Models.User.UserDetailViewModel
 
 @{
     ViewBag.Title = "Details";
@@ -9,107 +9,107 @@
 
 <div>
     <h4>ApplicationUser</h4>
-    <hr />
+    <hr/>
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Surname)
+            @Html.DisplayNameFor(model => model.User.Surname)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Surname)
+            @Html.DisplayFor(model => model.User.Surname)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.GivenName)
+            @Html.DisplayNameFor(model => model.User.GivenName)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.GivenName)
+            @Html.DisplayFor(model => model.User.GivenName)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.MobilePhone)
+            @Html.DisplayNameFor(model => model.User.MobilePhone)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.MobilePhone)
+            @Html.DisplayFor(model => model.User.MobilePhone)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Email)
+            @Html.DisplayNameFor(model => model.User.Email)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Email)
+            @Html.DisplayFor(model => model.User.Email)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.EmailConfirmed)
+            @Html.DisplayNameFor(model => model.User.EmailConfirmed)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.EmailConfirmed)
+            @Html.DisplayFor(model => model.User.EmailConfirmed)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.PhoneNumber)
+            @Html.DisplayNameFor(model => model.User.PhoneNumber)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.PhoneNumber)
+            @Html.DisplayFor(model => model.User.PhoneNumber)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.PhoneNumberConfirmed)
+            @Html.DisplayNameFor(model => model.User.PhoneNumberConfirmed)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.PhoneNumberConfirmed)
+            @Html.DisplayFor(model => model.User.PhoneNumberConfirmed)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.TwoFactorEnabled)
+            @Html.DisplayNameFor(model => model.User.LockoutEndDateUtc)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.TwoFactorEnabled)
+            @Html.DisplayFor(model => model.User.LockoutEndDateUtc)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.LockoutEndDateUtc)
+            @Html.DisplayNameFor(model => model.User.LockoutEnabled)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.LockoutEndDateUtc)
+            @Html.DisplayFor(model => model.User.LockoutEnabled)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.LockoutEnabled)
+            @Html.DisplayNameFor(model => model.User.AccessFailedCount)
         </dt>
-
         <dd>
-            @Html.DisplayFor(model => model.LockoutEnabled)
+            @Html.DisplayFor(model => model.User.AccessFailedCount)
         </dd>
-
         <dt>
-            @Html.DisplayNameFor(model => model.AccessFailedCount)
+            @Html.DisplayNameFor(model => model.User.UserName)
         </dt>
-
         <dd>
-            @Html.DisplayFor(model => model.AccessFailedCount)
+            @Html.DisplayFor(model => model.User.UserName)
         </dd>
-
         <dt>
-            @Html.DisplayNameFor(model => model.UserName)
+            @Html.DisplayNameFor(model => model.User.Manager)
         </dt>
-
         <dd>
-            @Html.DisplayFor(model => model.UserName)
+            @Html.DisplayFor(model => model.User.Manager.UserName)
         </dd>
-
     </dl>
 </div>
+
+@if (Model.Issues != null && Model.Issues.Any())
+{
+    @Html.Partial("_IssuesListPartial", Model.Issues)
+}
+
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Edit", "Edit", new { id = Model.User.Id }) |
     @Html.ActionLink("Back to List", "Index")
 </p>

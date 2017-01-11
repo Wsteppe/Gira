@@ -1,8 +1,11 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using System.Net;
 using System.Web.Mvc;
 using Gira.Data;
 using Gira.Data.Entities;
+using Gira.Models.User;
 using Gira.Resources;
 
 namespace Gira.Controllers
@@ -31,17 +34,73 @@ namespace Gira.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest, BusinessErrors.UserInvalid);
             }
-            var applicationUser = await _db.Users.GetAsync(id);
-            if (applicationUser == null)
+            var user = await _db.Users.GetAsync(id);
+            if (user == null)
                 return HttpNotFound();
 
-            return View(applicationUser);
+            //add user issues to detail view
+            if (User.IsInRole("Administrator") || User.IsInRole("Manager"))
+            {
+                //var issues = _db.Issues.FindAsync(i => i.)
+            }
+
+            var model = new UserDetailViewModel
+            {
+                User = user
+            };
+
+            return View(model);
+        }
+
+        public async Task<List<SelectListItem>> getManagers()
+        {
+            var managerRole = await _db.Roles.SingleOrDefaultAsync(r => r.Name.ToLower().Equals("manager"));
+            if (managerRole == null)
+                return null;
+
+            var managers = await _db.Users.FindAsync(u => u.Roles.Any(r => r.RoleId.Equals(managerRole.Id)));
+
+            var list = managers.Select(manager => new SelectListItem
+            {
+                Text = manager.UserName,
+                Value = manager.ManagerId
+            }).ToList();
+
+            list.Add(new SelectListItem
+            {
+                Text = "",
+                Value = null
+            });
+            return list;
+
         }
 
         // GET: User/Create
-        public ActionResult Create()
+        public async Task<ActionResult> Create()
         {
-            return View();
+            var selectList = await getManagers();
+
+            if(selectList == null)
+                return new HttpStatusCodeResult(HttpStatusCode.InternalServerError, BusinessErrors.NoManagers);
+
+            var model = new UserEditViewModel
+            {
+                Managers = selectList
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Create(UserEditViewModel model)
+        {
+            if (model?.User == null || !ModelState.IsValid) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
+            _db.Users.Add(model.User);
+            await _db.SaveAsync();
+
+            return RedirectToAction("Index");
         }
 
         // GET: User/Edit/5
@@ -55,7 +114,18 @@ namespace Gira.Controllers
             if (applicationUser == null)
                 return HttpNotFound();
 
-            return View(applicationUser);
+            var selectList = await getManagers();
+
+            if (selectList == null)
+                return new HttpStatusCodeResult(HttpStatusCode.InternalServerError, BusinessErrors.NoManagers);
+
+            var model = new UserEditViewModel
+            {
+                User = applicationUser,
+                Managers = selectList
+            };
+
+            return View(model);
         }
 
         // POST: User/Edit/5
@@ -63,11 +133,12 @@ namespace Gira.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit(ApplicationUser applicationUser)
+        public async Task<ActionResult> Edit(UserEditViewModel model)
         {
-            if (applicationUser == null || !ModelState.IsValid) return View(applicationUser);
-        
-            _db.Users.Update(applicationUser);
+            if (model?.User == null || !ModelState.IsValid)
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
+            _db.Users.Update(model.User);
             await _db.SaveAsync();
             return RedirectToAction("Index");
         }

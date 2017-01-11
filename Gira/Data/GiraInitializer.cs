@@ -38,12 +38,23 @@ namespace Gira.Data
             }
 
             #region users
+            var louis = new ApplicationUser
+            {
+                UserName = "Louis",
+                Email = "Louis@mail.com",
+                Surname = "Loeder",
+                GivenName = "Louis",
+            };
+            userManager.Create(louis);
+            userManager.AddToRole(louis.Id, "Administrator");
+
             var ted = new ApplicationUser
             {
                 UserName = "Ted",
                 Email = "Ted@mail.com",
                 Surname = "Tedder",
                 GivenName = "Ted",
+                Manager = louis
             };
             userManager.Create(ted);
             userManager.AddToRole(ted.Id, "Manager");
@@ -54,6 +65,7 @@ namespace Gira.Data
                 Email = "Bob@mail.com",
                 Surname = "Bobber",
                 GivenName = "Bob",
+                Manager = ted
             };
             userManager.Create(bob);
             userManager.AddToRole(bob.Id, "Dispatcher");
@@ -64,19 +76,10 @@ namespace Gira.Data
                 Email = "Jan@mail.com",
                 Surname = "Janner",
                 GivenName = "Jan",
+                Manager = ted
             };
             userManager.Create(jan);
             userManager.AddToRole(jan.Id, "Solver");
-
-            var louis = new ApplicationUser
-            {
-                UserName = "Louis",
-                Email = "Louis@mail.com",
-                Surname = "Loeder",
-                GivenName = "Louis",
-            };
-            userManager.Create(louis);
-            userManager.AddToRole(louis.Id, "Administrator");
 
             #endregion
 

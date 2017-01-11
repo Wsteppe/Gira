@@ -69,7 +69,6 @@ namespace Gira.Controllers
                         Subject = "epicTestIssue1",
                         Description = "Issue1",
                         IssueStatusCode = IssueStatusCode.New,
-                        Manager = ted,
                         PriorityCode = PriorityCode.immediate,
                         Occurrence = DateTime.Now.AddDays(-10),
                         Registered = DateTime.Now
@@ -80,7 +79,6 @@ namespace Gira.Controllers
                         Subject = "Issue2",
                         Description = "Issue2",
                         IssueStatusCode = IssueStatusCode.Closed,
-                        Manager = ted,
                         PriorityCode = PriorityCode.low,
                         Occurrence = DateTime.Now.AddDays(-5),
                         Registered = DateTime.Now
@@ -91,7 +89,6 @@ namespace Gira.Controllers
                         Subject = "Issue3",
                         Description = "Issue3",
                         IssueStatusCode = IssueStatusCode.Enquiring,
-                        Manager = ted,
                         PriorityCode = PriorityCode.low,
                         Occurrence = DateTime.Now.AddDays(-5),
                         Registered = DateTime.Now,
@@ -103,7 +100,6 @@ namespace Gira.Controllers
                         Subject = "Issue4",
                         Description = "Issue4",
                         IssueStatusCode = IssueStatusCode.Processing,
-                        Manager = ted,
                         PriorityCode = PriorityCode.low,
                         Occurrence = DateTime.Now.AddDays(-15),
                         Registered = DateTime.Now,
