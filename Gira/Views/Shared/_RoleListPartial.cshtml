@@ -1,23 +1,13 @@
 ﻿@model IEnumerable<Microsoft.AspNet.Identity.EntityFramework.IdentityRole>
 
 <div>
-    <table>
-        <tr>
-            <th>
-                Role name
-            </th>
-            <th>
-
-            </th>
-        </tr>
-
+    <p>
+        <span style="font-weight: bold">Current roles:</span>
         @foreach (var role in Model)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => role.Name)
-                </td>
-            </tr>
+            <span>
+                @Html.DisplayFor(modelItem => role.Name) |              
+            </span>        
         }
-    </table>
+    </p>
 </div>

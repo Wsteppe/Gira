@@ -1,24 +1,4 @@
-﻿@model IEnumerable<Microsoft.AspNet.Identity.EntityFramework.IdentityRole>
+﻿@model MultiSelectList
 
-<div>
-    <table>
-        <tr>
-            <th>
-                Role name
-            </th>
-            <th>
 
-            </th>
-        </tr>
-
-        @foreach (var role in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => role.Name)
-                </td>
-            </tr>
-        }
-    </table>
-</div>
 

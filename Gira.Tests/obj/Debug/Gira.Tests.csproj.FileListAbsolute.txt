@@ -121,3 +121,4 @@ C:\Users\wsteppe\Documents\KPMG Programming\Gira\Gira.Tests\obj\Debug\Gira.Tests
 C:\Users\wsteppe\Documents\KPMG Programming\Gira\Gira.Tests\obj\Debug\Gira.Tests.pdb
 C:\Users\wsteppe\Documents\KPMG Programming\Gira\Gira.Tests\bin\Debug\Stateless.dll
 C:\Users\wsteppe\Documents\KPMG Programming\Gira\Gira.Tests\bin\Debug\Stateless.xml
+C:\Users\wsteppe\Documents\KPMG Programming\Gira\Gira.Tests\bin\Debug\nl\Gira.resources.dll

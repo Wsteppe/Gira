@@ -9,6 +9,7 @@ using Gira.Data.Entities;
 using Gira.Models.User;
 using Gira.Resources;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace Gira.Controllers
 {
@@ -16,10 +17,12 @@ namespace Gira.Controllers
     public class UserController : Controller
     {
         private readonly IGiraUoW _db;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public UserController(IGiraUoW db)
+        public UserController(IGiraUoW db, UserManager<ApplicationUser> userManager)
         {
             _db = db;
+            _userManager = userManager;
         }
 
         // GET: User
@@ -116,22 +119,45 @@ namespace Gira.Controllers
         public async Task<ActionResult> Edit(string id)
         {
             if (id == null)
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest, BusinessErrors.UserInvalid);
 
             var applicationUser = await _db.Users.GetAsync(id);
 
             if (applicationUser == null)
                 return HttpNotFound();
 
-            var selectList = await getManagers();
+            //get roles
+            var userRoles = await _db.Roles.FindAsync(r => r.Users.Any(u => u.UserId == id));
+            var userRolesList = userRoles as IList<IdentityRole> ?? userRoles.ToList();
 
-            if (selectList == null)
+            var dbRoles = await _db.Roles.GetAllAsync();
+
+            var selectRoles = new List<SelectListItem>();
+
+            //make roles into selectlist
+            foreach (var role in dbRoles)
+            {
+                var roleSelect = new SelectListItem
+                {
+                    Value = role.Id,
+                    Text = role.Name,
+                    Selected = userRolesList.Any(r => r.Id == role.Id)
+                };
+                selectRoles.Add(roleSelect);
+            }
+
+            //get managers
+            var managers = await getManagers();
+
+            if (managers == null)
                 return new HttpStatusCodeResult(HttpStatusCode.InternalServerError, BusinessErrors.NoManagers);
 
             var model = new UserEditViewModel
             {
                 User = applicationUser,
-                Managers = selectList
+                Managers = managers,
+                Roles = selectRoles,
+                UserRoles = userRolesList
             };
 
             return View(model);
@@ -150,6 +176,33 @@ namespace Gira.Controllers
             _db.Users.Update(model.User);
             await _db.SaveAsync();
             return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public async Task<PartialViewResult> AddRoles(UserEditViewModel model)
+        {
+            if (model?.User?.Id == null || model.Roles == null)
+                throw new Exception(BusinessErrors.UserInvalid);
+
+            var user = model.User;
+
+            foreach (var role in model.Roles)
+            {
+                var isInRole = await _userManager.IsInRoleAsync(user.Id, role.Text);
+
+                if (role.Selected && !isInRole)
+                {
+                    await _userManager.AddToRoleAsync(user.Id, role.Text);
+                }
+                else if (!role.Selected && isInRole)
+                {
+                    await _userManager.RemoveFromRoleAsync(user.Id, role.Text);
+                }
+            }
+
+            var roles = await _db.Roles.FindAsync(r => r.Users.Any(u => u.UserId == user.Id));
+
+            return PartialView("_RoleListPartial", roles);
         }
 
         // GET: User/Delete/5
