@@ -243,6 +243,7 @@
     <Compile Include="Models\Issues\IssueTransitionViewModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\RoleListViewModel.cs" />
+    <Compile Include="Models\User\UserCreateViewModel.cs" />
     <Compile Include="Models\User\UserEditViewModel.cs" />
     <Compile Include="Models\User\UserDetailViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -282,6 +283,8 @@
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -329,7 +332,6 @@
     <Content Include="Views\Issue\Create.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Issue\_IssueCreatePartial.cshtml" />
-    <Content Include="Views\Role\_RoleListPartial.cshtml" />
     <Content Include="Views\User\Create.cshtml" />
     <Content Include="Views\User\Delete.cshtml" />
     <Content Include="Views\User\Details.cshtml" />
@@ -339,9 +341,11 @@
     <Content Include="Views\Manage\ManageProfile.cshtml" />
     <Content Include="Views\Issue\Transition.cshtml" />
     <Content Include="Views\View.cshtml" />
-    <Content Include="Views\Shared\_UserAdminListPartial.cshtml" />
     <Content Include="Views\Shared\_IssuesListPartial.cshtml" />
     <Content Include="Views\User\View.cshtml" />
+    <Content Include="Views\Shared\_RoleListPartial.cshtml" />
+    <Content Include="Views\User\_RoleSelectList.cshtml" />
+    <Content Include="Views\Shared\_userAdminListPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -4,7 +4,7 @@ using Gira.Data.Entities;
 
 namespace Gira.Models.User
 {
-    public class UserEditViewModel
+    public class UserCreateViewModel
     {
         public ApplicationUser User { get; set; }
 
@@ -14,5 +14,7 @@ namespace Gira.Models.User
         /// Issue list for when application user is manager or administrator
         /// </summary>
         public IEnumerable<SelectListItem> Managers { get; set; }
+
+        public IEnumerable<ApplicationUser> Users { get; set; }
     }
 }

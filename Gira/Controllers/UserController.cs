@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Net;
@@ -85,9 +86,12 @@ namespace Gira.Controllers
             if(selectList == null)
                 return new HttpStatusCodeResult(HttpStatusCode.InternalServerError, BusinessErrors.NoManagers);
 
-            var model = new UserEditViewModel
+            var users = await _db.Users.GetAllAsync();
+
+            var model = new UserCreateViewModel()
             {
-                Managers = selectList
+                Managers = selectList,
+                Users = users
             };
 
             return View(model);
@@ -95,14 +99,17 @@ namespace Gira.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create(UserEditViewModel model)
+        public async Task<PartialViewResult> Create(UserEditViewModel model)
         {
-            if (model?.User == null || !ModelState.IsValid) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            if (model?.User == null || !ModelState.IsValid)
+                throw new Exception(BusinessErrors.UserInvalid);
 
             _db.Users.Add(model.User);
             await _db.SaveAsync();
 
-            return RedirectToAction("Index");
+            var users = await _db.Users.GetAllAsync();
+
+            return PartialView("_UserAdminListPartial", users);
         }
 
         // GET: User/Edit/5
