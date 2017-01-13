@@ -14,6 +14,7 @@ namespace Gira.Data
         private IEntityRepository<Issue> _issues;
         private IIdentityRepository<IdentityRole> _roles;
         private IIdentityRepository<ApplicationUser> _users;
+        private IEntityRepository<IssueHistory> _issueHistories;
 
 
         public GiraUoW(GiraDbContext context)
@@ -30,6 +31,7 @@ namespace Gira.Data
         public IEntityRepository<Issue> Issues => _issues ?? (_issues = new EntityRepository<Issue>(_context));
         public IIdentityRepository<IdentityRole> Roles => _roles ?? (_roles = new RoleRepository(_context));
         public IIdentityRepository<ApplicationUser> Users => _users ?? (_users = new ApplicationUserRepository(_context));
+        public IEntityRepository<IssueHistory> Histories => _issueHistories ?? (_issueHistories = new EntityRepository<IssueHistory>(_context));
 
         #region dispose
         public void Dispose()

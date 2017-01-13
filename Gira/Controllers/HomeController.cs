@@ -78,7 +78,7 @@ namespace Gira.Controllers
                         Creator = bob,
                         Subject = "Issue2",
                         Description = "Issue2",
-                        IssueStatusCode = IssueStatusCode.Closed,
+                        IssueStatusCode = IssueStatusCode.New,
                         PriorityCode = PriorityCode.low,
                         Occurrence = DateTime.Now.AddDays(-5),
                         Registered = DateTime.Now
@@ -88,28 +88,62 @@ namespace Gira.Controllers
                         Creator = louis,
                         Subject = "Issue3",
                         Description = "Issue3",
-                        IssueStatusCode = IssueStatusCode.Enquiring,
+                        IssueStatusCode = IssueStatusCode.New,
                         PriorityCode = PriorityCode.low,
                         Occurrence = DateTime.Now.AddDays(-5),
                         Registered = DateTime.Now,
                         ResponsibleUser = louis
-                    },
-                    new Issue
-                    {
-                        Creator = louis,
-                        Subject = "Issue4",
-                        Description = "Issue4",
-                        IssueStatusCode = IssueStatusCode.Processing,
-                        PriorityCode = PriorityCode.low,
-                        Occurrence = DateTime.Now.AddDays(-15),
-                        Registered = DateTime.Now,
-                        ResponsibleUser = jan
                     }
+                };
+
+                var issueWithHistory = new Issue
+                {
+                    Creator = louis,
+                    Subject = "Issue4",
+                    Description = "Issue4",
+                    IssueStatusCode = IssueStatusCode.Solved,
+                    PriorityCode = PriorityCode.low,
+                    Occurrence = DateTime.Now.AddDays(-15),
+                    Registered = DateTime.Now.AddDays(-10),
+                    ResponsibleUser = jan
                 };
 
                 foreach (var issue in issueList)
                 {
                     _db.Issues.Add(issue);
+                }
+
+                var histories = new List<IssueHistory>
+                {
+                    new IssueHistory
+                    {
+                    Comment = "Issue created in database",
+                    CreatedOn = DateTime.Now.AddDays(-9),
+                    Issue = issueWithHistory,
+                    Status = IssueStatusCode.New,
+                    User = louis
+                    },
+                    new IssueHistory
+                    {
+                    Comment = "Issue assigned to user",
+                    CreatedOn = DateTime.Now.AddDays(-8),
+                    Issue = issueWithHistory,
+                    Status = IssueStatusCode.Processing,
+                    User = bob
+                    },
+                    new IssueHistory
+                    {
+                    Comment = "Issue solved by solver",
+                    CreatedOn = DateTime.Now.AddDays(-5),
+                    Issue = issueWithHistory,
+                    Status = IssueStatusCode.Solved,
+                    User = jan
+                    }
+                };
+
+                foreach (var history in histories)
+                {
+                    _db.Histories.Add(history);
                 }
 
                 await _db.SaveAsync();

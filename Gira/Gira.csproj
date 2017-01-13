@@ -206,6 +206,7 @@
     <Compile Include="Data\Entities\ApplicationUser.cs" />
     <Compile Include="Data\Entities\BaseEntity.cs" />
     <Compile Include="Data\Entities\Issue.cs" />
+    <Compile Include="Data\Entities\IssueHistory.cs" />
     <Compile Include="Data\Enums\IssueStatusCode.cs" />
     <Compile Include="Data\Enums\IssueTransition.cs" />
     <Compile Include="Data\Enums\PriorityCode.cs" />
@@ -235,6 +236,10 @@
     <Compile Include="Migrations\201701111547177_RevisedManager.cs" />
     <Compile Include="Migrations\201701111547177_RevisedManager.Designer.cs">
       <DependentUpon>201701111547177_RevisedManager.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201701132324394_IssueHistory.cs" />
+    <Compile Include="Migrations\201701132324394_IssueHistory.Designer.cs">
+      <DependentUpon>201701132324394_IssueHistory.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -274,6 +279,9 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <EmbeddedResource Include="Migrations\201701132324394_IssueHistory.resx">
+      <DependentUpon>201701132324394_IssueHistory.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\UIResource.nl.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>UIResource.nl.Designer.cs</LastGenOutput>
@@ -346,6 +354,7 @@
     <Content Include="Views\Shared\_RoleListPartial.cshtml" />
     <Content Include="Views\User\_RoleSelectList.cshtml" />
     <Content Include="Views\Shared\_userAdminListPartial.cshtml" />
+    <Content Include="Views\Issue\History.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

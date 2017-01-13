@@ -53,6 +53,10 @@ namespace Gira.Business
             _stateMachine.Configure(IssueStatusCode.Refused)
                 .Permit(IssueTransition.Assign, IssueStatusCode.Processing)
                 .Permit(IssueTransition.Cancel, IssueStatusCode.Canceled);
+
+            _stateMachine.Configure(IssueStatusCode.Enquiring)
+                .Permit(IssueTransition.Cancel, IssueStatusCode.Canceled)
+                .Permit(IssueTransition.Respond, IssueStatusCode.New);
         }
     }
 }

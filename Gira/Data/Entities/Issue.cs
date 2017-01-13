@@ -1,9 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Gira.Data.Enums;
-using Gira.Models;
 
 namespace Gira.Data.Entities
 {
@@ -35,5 +35,7 @@ namespace Gira.Data.Entities
         public string CreatorId { get; set; }
 
         public DateTime? Registered { get; set; }
+
+        public virtual ICollection<IssueHistory> Histories { get; set; }
     }
 }

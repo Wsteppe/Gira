@@ -7,6 +7,7 @@
         Close,
         Cancel,
         Enquire,
-        Refuse
+        Refuse,
+        Respond
     }
 }

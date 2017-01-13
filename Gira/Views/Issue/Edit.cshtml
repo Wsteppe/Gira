@@ -8,11 +8,7 @@
 }
 
 <h2>Edit</h2>
-<h4>Issue</h4>
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
-
+<h4>Issue - @Html.ActionLink("Check history", "History", new { id = Model.Issue.Id }, null)</h4>
 
 @using (Html.BeginForm())
 {
@@ -65,7 +61,7 @@
 
         <div class="form-group">
             @Html.LabelFor(model => model.Issue.IssueStatusCode, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            <div class="col-md-10 form-control-static">
                 @Html.DisplayFor(model => model.Issue.IssueStatusCode, new { htmlAttributes = new { @class = "form-control" } })
             </div>
         </div>
@@ -88,4 +84,9 @@
         <h4>@Html.ActionLink(transition.ToString(), "Transition", "Issue", new { id = Model.Issue.Id, transition }, null)</h4>
     }
 }
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
 

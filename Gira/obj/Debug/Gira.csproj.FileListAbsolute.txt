@@ -157,3 +157,4 @@ C:\Users\wsteppe\Documents\KPMG Programming\Gira\Gira\obj\Debug\Gira.Resources.U
 C:\Users\wsteppe\Documents\KPMG Programming\Gira\Gira\bin\nl\Gira.resources.dll
 C:\Users\wsteppe\Documents\KPMG Programming\Gira\Gira\obj\Debug\Gira.Resources.UIResource.nl.resources
 C:\Users\wsteppe\Documents\KPMG Programming\Gira\Gira\obj\Debug\nl\Gira.resources.dll
+C:\Users\wsteppe\Documents\KPMG Programming\Gira\Gira\obj\Debug\Gira.Migrations.IssueHistory.resources

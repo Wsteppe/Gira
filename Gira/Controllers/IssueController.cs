@@ -69,6 +69,19 @@ namespace Gira.Controllers
             return View(model);
         }
 
+        public async Task<ActionResult> History(int? id)
+        {
+            if (id == null)
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
+            var issue = await _db.Issues.GetAsync(id.Value);
+
+            var dbHistories = await _db.Histories.FindAsync(h => h.IssueId == issue.Id);
+            var model = dbHistories.OrderByDescending(h => h.CreatedOn);
+
+            return View(model);
+        }
+
         // POST: User/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -114,31 +127,39 @@ namespace Gira.Controllers
 
             var solvers = await _db.Users.FindAsync(u => u.Roles.Any(r => r.RoleId == solverRole.Id));
 
-            if (solvers == null || !solvers.Any())
+            var solverList = solvers as IList<ApplicationUser> ?? solvers.ToList();
+
+            if (solvers == null || !solverList.Any())
                 return new HttpStatusCodeResult(HttpStatusCode.NotFound, BusinessErrors.NoSolvers);
 
-            model.Solvers = solvers;
+            //make select list item
+            model.Solvers = solverList.Select(solver => new SelectListItem
+            {
+                Text = solver.UserName,
+                Value = solver.Id
+            }).ToList();
 
             return View(model);
         }
 
-        //public async Task<ActionResult> PerformTransition(int? id, IssueTransition? transition, string userId)
-        public async Task<ActionResult> PerformTransition(int? id, IssueTransition? transition, string userId)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Transition(IssueTransitionViewModel model)
         {
-            if (id == null || transition ==  null)
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            
+            if (model?.Issue == null || model.Issue.Id == 0 || model.Transition == IssueTransition.Assign && model.SolverId == null)
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest, BusinessErrors.IssueInvalid);
+
             //get issue
-            var issue = await _db.Issues.GetAsync(id.Value);
+            var issue = await _db.Issues.GetAsync(model.Issue.Id);
 
             if (issue == null)
                 return HttpNotFound(BusinessErrors.IssueInvalid);
 
             try
             {
-                await _transitionService.Transition(issue, transition.Value, userId);
+                await _transitionService.Transition(issue, model.Transition, model.SolverId, model.Comment);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest, ex.Message);
             }
@@ -170,6 +191,17 @@ namespace Gira.Controllers
             issue.Registered = DateTime.Now;
             issue.IssueStatusCode = IssueStatusCode.New;
             _db.Issues.Add(issue);
+
+            var history = new IssueHistory
+            {
+                IssueId = issue.Id,
+                CreatedOn = DateTime.Now,
+                Comment = "Created: " + issue.Subject,
+                Status = issue.IssueStatusCode,
+                UserId = System.Web.HttpContext.Current.User.Identity.GetUserId()
+            };
+            _db.Histories.Add(history);
+
             await _db.SaveAsync();
             return RedirectToAction("Index", "Issue");
         }

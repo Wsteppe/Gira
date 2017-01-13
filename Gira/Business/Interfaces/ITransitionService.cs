@@ -13,7 +13,7 @@ namespace Gira.Business.Interfaces
         /// <param name="issue"></param>
         /// <param name="transition"></param>
         /// <returns></returns>
-        Task<Issue> Transition(Issue issue, IssueTransition transition, string userId);
+        Task<Issue> Transition(Issue issue, IssueTransition transition, string userId, string remark);
 
         /// <summary>
         /// wrapper method for statemachine

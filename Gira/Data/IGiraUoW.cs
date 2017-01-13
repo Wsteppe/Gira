@@ -10,6 +10,7 @@ namespace Gira.Data
         Task SaveAsync();
 
         IEntityRepository<Issue> Issues { get; }
+        IEntityRepository<IssueHistory> Histories { get; }
         IIdentityRepository<IdentityRole> Roles { get; }
         IIdentityRepository<ApplicationUser> Users { get; }
     }

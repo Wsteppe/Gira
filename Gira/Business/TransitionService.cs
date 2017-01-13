@@ -24,7 +24,7 @@ namespace Gira.Business
             _db = db;
         }
 
-        public async Task<Issue> Transition(Issue issue, IssueTransition transition, string userId)
+        public async Task<Issue> Transition(Issue issue, IssueTransition transition, string userId, string comment)
         {
             //if transition not in possible transitions
             if(!GetTransitions(issue).Contains(transition))
@@ -34,9 +34,19 @@ namespace Gira.Business
 
             await TransferOwnerShip(issue, transition, userId);
 
-            //todo: add history
-
             _db.Issues.Update(issue);
+
+            var history = new IssueHistory
+            {
+                IssueId = issue.Id,
+                CreatedOn = DateTime.Now,
+                Comment = comment,
+                Status = issue.IssueStatusCode,
+                UserId = HttpContext.Current.User.Identity.GetUserId()
+            };
+
+            _db.Histories.Add(history);
+
             await _db.SaveAsync();
 
             return issue;
@@ -66,6 +76,17 @@ namespace Gira.Business
                 case IssueTransition.Enquire:
                 case IssueTransition.Solve:
                     issue.ResponsibleUserId = issue.CreatorId;
+                    break;
+                
+                //in case of response, get latest history status and set responsible owner to be this guy. (the one who asked the question)
+                case IssueTransition.Respond:
+                    var histories = await _db.Histories.FindAsync(h => h.IssueId == issue.Id);
+                    var latesthistory = histories.FirstOrDefault(h => h.CreatedOn == histories.Max(x => x.CreatedOn));
+
+                    if (latesthistory == null)
+                        throw new BusinessException(BusinessErrors.IssueInvalid);
+
+                    issue.ResponsibleUserId = latesthistory.UserId;
                     break;
 
                 default:
