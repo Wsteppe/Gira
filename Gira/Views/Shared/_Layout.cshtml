@@ -31,10 +31,12 @@
     </div>
     <div class="container body-content">
         @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - The Gira Team</p>
-        </footer>
+        <div class="navbar-fixed-bottom">
+            <hr />
+            <footer class="col-md-4">
+                <p>&copy; @DateTime.Now.Year - The Gira Team</p>
+            </footer>
+        </div>
     </div>
 
     <script src="~/Scripts/jquery-1.10.2.min.js"></script>
@@ -42,6 +44,8 @@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/customJquery")
+    
     @RenderSection("scripts", required: false)
 </body>
 </html>

@@ -6,40 +6,48 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Overview of Issues</h2>
+<h2>Issue Management</h2>
 
 <div>
     @if (Model.AllIssues != null && Model.AllIssues.Any())
     {
-        <h4>Admin: all issues</h4>
-        @Html.Partial("_IssuesListPartial", Model.AllIssues)
+        <h4>Admin: all issues <img id="adminDropDown" src="/Content/Images/dropDown.png" alt="Show More"/></h4>
+        <div id="adminIssues" style="display: none">
+            @Html.Partial("_IssuesListPartial", Model.AllIssues)
+        </div>
     }
 </div>
 
 <div>
     @if (Model.CreatedIssues != null && Model.CreatedIssues.Any())
     {
-        <h4>My created Issues</h4>
-        @Html.Partial("_IssuesListPartial", Model.CreatedIssues)
+        <h4>My created Issues <img id="createdDropDown" src="/Content/Images/dropDown.png" alt="Show More"/></h4>
+        <div id="createdIssues" style="display: none">
+            @Html.Partial("_IssuesListPartial", Model.CreatedIssues)
+        </div>
     }
 </div>
 
 <div>
     @if (Model.CreatedIssues != null && Model.ResponsibleIssues.Any())
     {
-        <h4>My current issue list</h4>
-        @Html.Partial("_IssuesListPartial", Model.ResponsibleIssues)
+        <h4>My current issue list <img id="responsibleDropDown" src="/Content/Images/dropDown.png" alt="Show More" /></h4>
+        <div id="responsibleIssues" style="display: none">
+            @Html.Partial("_IssuesListPartial", Model.ResponsibleIssues)
+        </div>
     }
 </div>
 
 <div>
     @if (Model.ManagedIssues != null && Model.ManagedIssues.Any())
     {
-        <h4>My team issues (management only)</h4>
-        @Html.Partial("_IssuesListPartial", Model.ManagedIssues)
+        <h4>My team issues (management only) <img id="managedDropDown" src="/Content/Images/dropDown.png" alt="Show More"/></h4>
+        <div id="managedIssues" style="display: none">
+            @Html.Partial("_IssuesListPartial", Model.ManagedIssues)
+        </div>
     }
 </div>
-<br/>
+
 <div>
     @Html.Partial("_IssueCreatePartial")
 </div>

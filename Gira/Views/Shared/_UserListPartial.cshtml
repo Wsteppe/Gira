@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<Gira.Data.Entities.ApplicationUser>
 
 <div>
-    <table>
+    <table class="table">
         @foreach (var user in Model)
         {
             <tr>
@@ -19,6 +19,9 @@
                 </th>
                 <th>
                     Manager
+                </th>
+                <th>
+                    Action
                 </th>
             </tr>
             <tr>
@@ -38,9 +41,7 @@
                     @Html.DisplayFor(modelItem => user.Manager.UserName)
                 </td>
                 <td>
-                    @*Html.ActionLink("Edit", "Edit", "User",new { id = user.Id }, null) |*@
                     @Html.ActionLink("Details", "Details","User", new { id = user.Id }, null)
-                    @*@Html.ActionLink("Delete", "Delete","User",new { id = user.Id }, null)*@
                 </td>
             </tr>
         }

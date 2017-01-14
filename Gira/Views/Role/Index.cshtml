@@ -4,10 +4,10 @@
     ViewBag.Title = "Manage Roles";
 }
 
-<h2>Application Roles:</h2>
+<h2>Role Management</h2>
 
 @Html.Partial("_RoleListPartial", Model.Roles)
 
-<h2>Assign Roles to users in the User Edit Screen:</h2>
-
 @Html.Partial("_UserAdminListPartial", Model.Users)
+
+<p style="font-size: 12px;">Note: you can assign roles to users in the User Edit Screen.</p>

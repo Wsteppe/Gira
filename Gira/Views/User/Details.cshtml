@@ -8,7 +8,7 @@
 <h2>Details</h2>
 
 <div>
-    <h4>ApplicationUser</h4>
+    <h4>User @Model.User.UserName - @Html.ActionLink("Back to List", "Index")</h4>
     <hr/>
     <dl class="dl-horizontal">
         <dt>
@@ -28,27 +28,11 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.User.MobilePhone)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.User.MobilePhone)
-        </dd>
-
-        <dt>
             @Html.DisplayNameFor(model => model.User.Email)
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.User.Email)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.User.EmailConfirmed)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.User.EmailConfirmed)
         </dd>
 
         <dt>
@@ -59,36 +43,6 @@
             @Html.DisplayFor(model => model.User.PhoneNumber)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.User.PhoneNumberConfirmed)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.User.PhoneNumberConfirmed)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.User.LockoutEndDateUtc)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.User.LockoutEndDateUtc)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.User.LockoutEnabled)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.User.LockoutEnabled)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.User.AccessFailedCount)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.User.AccessFailedCount)
-        </dd>
         <dt>
             @Html.DisplayNameFor(model => model.User.UserName)
         </dt>
@@ -109,7 +63,6 @@
     @Html.Partial("_IssuesListPartial", Model.Issues)
 }
 
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.User.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+<h4>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.User.Id })
+</h4>

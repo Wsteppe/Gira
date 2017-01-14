@@ -1,9 +1,10 @@
 ﻿@{
     ViewBag.Title = "Home Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <div class="jumbotron">
-    <h1>Gira ©</h1>
+    <h1>Gira <span id="copyrightSpan" style="display: none">©</span></h1>
     <p class="lead">@Html.ActionLink("Trigger / Untrigger Admin Mode!", "TriggerAdmin", "Home")</p>
     <p>Admin Mode will give you full access rights to the application, and will generate some test data. </p>
 </div>

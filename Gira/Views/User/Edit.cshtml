@@ -6,120 +6,118 @@
 }
 
 <h2>Edit</h2>
-<h4>User @Model.User.GivenName</h4>
-
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-
-    <div class="form-horizontal">
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.User.Id)
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.User.Surname, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.User.Surname, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.User.Surname, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.User.GivenName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.User.GivenName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.User.GivenName, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.User.MobilePhone, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.User.MobilePhone, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.User.MobilePhone, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.User.Email, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.User.Email, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.User.Email, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.User.PhoneNumber, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.User.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.User.PhoneNumber, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.User.UserName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.User.UserName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.User.UserName, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.User.ManagerId, "Manager", new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(model => model.User.ManagerId, Model.Managers, null, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.User.ManagerId, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
-        </div>
-    </div>
-}
-
-@using (Ajax.BeginForm("AddRoles", new AjaxOptions { UpdateTargetId = "roleList" }))
-{
-    <h4>User roles - Ajax Magic</h4>
-    <hr/>
-
-    <div id="roleList">
-        @Html.Partial("_RoleListPartial", Model.UserRoles)
-    </div>
-
-    <h4>Add roles</h4>
-
-    @Html.HiddenFor(m => m.User.Id);
-    @Html.HiddenFor(m => m.UserRoles);
-    <div class="form-horizontal">
-
-
-
-        @for (var i = 0; i < Model.Roles.Count(); i++)
+<h4>User @Model.User.GivenName - @Html.ActionLink("Back to List", "Index")</h4>
+<hr />
+<div>
+    <div class="col-md-6">
+        @using (Html.BeginForm())
         {
-            <div class="form-group" style="vertical-align: top; font-weight: bold;">
-                <div class="control-label col-md-2">
-                    @Model.Roles[i].Text
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.User.Id)
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.User.Surname, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.User.Surname, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.User.Surname, "", new { @class = "text-danger" })
+                    </div>
                 </div>
-                <div class="form-control-static">
-                    @Html.CheckBoxFor(m => m.Roles[i].Selected)
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.User.GivenName, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.User.GivenName, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.User.GivenName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.User.MobilePhone, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.User.MobilePhone, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.User.MobilePhone, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.User.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.User.Email, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.User.Email, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.User.PhoneNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.User.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.User.PhoneNumber, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.User.UserName, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.User.UserName, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.User.UserName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.User.ManagerId, "Manager", new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownListFor(model => model.User.ManagerId, Model.Managers, null, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.User.ManagerId, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Save" class="btn btn-default" />
+                    </div>
                 </div>
             </div>
-            @Html.HiddenFor(m => m.Roles[i].Value)
-            @Html.HiddenFor(m => m.Roles[i].Text)
         }
     </div>
 
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Save Roles" class="btn btn-default" />
-        </div>
-    </div>
-}
+    <div class="col-md-6">
+        @using (Ajax.BeginForm("AddRoles", new AjaxOptions { UpdateTargetId = "roleList" }))
+        {
+            <div id="roleList">
+                @Html.Partial("_RoleListPartial", Model.UserRoles)
+            </div>
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
+            <hr/>
+
+            @Html.HiddenFor(m => m.User.Id);
+            @Html.HiddenFor(m => m.UserRoles);
+            <div class="form-horizontal">
+
+
+
+                @for (var i = 0; i < Model.Roles.Count(); i++)
+                {
+                    <div class="form-group" style="vertical-align: top; font-weight: bold;">
+                        <div class="control-label col-md-2">
+                            @Model.Roles[i].Text
+                        </div>
+                        <div class="form-control-static col-md-6">
+                            @Html.CheckBoxFor(m => m.Roles[i].Selected)
+                        </div>
+                    </div>
+                    @Html.HiddenFor(m => m.Roles[i].Value)
+                    @Html.HiddenFor(m => m.Roles[i].Text)
+                }
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-1 col-md-10">
+                    <input type="submit" value="Save Roles" class="btn btn-default" />
+                </div>
+            </div>
+        }
+    </div>
 </div>
